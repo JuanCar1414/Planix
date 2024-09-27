@@ -1,0 +1,65 @@
+* {
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 450px;
+    height: 70px;
+    background-color: #2D5287;
+    border-radius: 99px;
+    color: #fff;
+
+    border: 3px solid #fff;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 99px;
+    padding: 1.5rem;
+}
+
+label:hover {
+    background-color: #f0f0f0;
+    border-radius: 99px;
+    padding: 1.5rem;
+    color: #000;
+}
+
+input[type="radio"]:checked+label {
+
+    background-color: #fff;
+    color: #000;
+
+    transition: border-color .15s cubic-bezier(.02, .94, .09, .97),
+        color .25s ease-out,
+        background-color .15s ease,
+        box-shadow .15s ease;
+
+}
+
+.menu {
+    position: relative;
+    width: 450px;
+    height: 300px;
+    overflow-y: auto;
+    border: 6px solid #fff;
+}
+
+.menu a:hover {
+    color: #ffffff;
+    border-radius: 99px;
+    padding: 1.5rem;
+}

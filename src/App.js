@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import CriarConta from './pages/criarConta/criarConta';
+import Login from './pages/login/login';
+import TelaInicio from './pages/telaInicio/telaInicio';
+import NavBar from './componentes/NavBar/NavBar';
+import Home from './pages/telaHome/telaHome';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/cadastro' element={<CriarConta></CriarConta>}></Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
