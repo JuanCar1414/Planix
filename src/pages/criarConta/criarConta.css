@@ -1,4 +1,4 @@
-body {
+#corpoCriarConta {
   height: 100vh;
   width: 100%;
 
@@ -11,21 +11,23 @@ body {
 
 }
 
-.formulario {
-  height: 350px;
+#formularioCriarConta {
+  height: 315px;
   width: 310px;
 
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+
+  margin: 8px;
 }
 
-.Submit {
-  width: 330px;
+#Submit {
+  width: 320px;
   height: 50px;
 
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: #2D5287;
   color: #fff;
 
@@ -43,12 +45,13 @@ body {
 }
 
 .logosRedesSociais {
-  height: 63px;
+  height: 55px;
   width: 180px;
 
   flex-direction: row;
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
 
+  margin-bottom: 8px;
+}

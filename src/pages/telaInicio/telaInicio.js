@@ -14,12 +14,15 @@ function TelaInicio() {
 
     return (
         <div className="App">
-            <img src={logoProjeto} alt="" height='200px' width='350px' />
-            <div class='btns'>
+            <div id="corpoInicio">
+                <img src={logoProjeto} alt="" height='200px' width='350px' />
+                <div class='btns'>
 
-                <Link to={'/login'}><button class='botaoEstilo'>Login</button></Link>
+                    <Link to={'/login'}><button class='botaoEstilo'>Login</button></Link>
 
-                <Link to={'/cadastro'}><button class='botaoEstilo'>Cadastro</button></Link>
+                    <Link to={'/cadastro'}><button class='botaoEstilo'>Cadastro</button></Link>
+
+                </div>
 
             </div>
 
