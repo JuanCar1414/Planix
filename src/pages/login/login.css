@@ -1,95 +1,95 @@
 body {
-    height: 100vh;
-    width: 100%;
-  
-    background-color: #2D5287;
-    display: flex;
-  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  
-  }
-  
-  .formulario{
-    height: 300px;
-    width: 310px;
-  
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .sessaoDeInputs{
-    height: 200px;
-    width: 100%;
-  
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-  
-  }
-  
-  .sessaoDeInputs{
-    height: 200px;
-    width: 100%;
-  
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-  
-  }
-  
-  .Submit{
-    width:  310px;
-    height: 50px;
-  
-    border-radius: 20px;
-    background-color: #2D5287;
-    color: #fff;
-  
-    border: 1px solid #ccc;
-  
-    font-family: "Poppins", sans-serif;
-    font-weight: lighter;
-    font-style: normal;
-    font-size: 14px;
-    padding: 8px;
-  
-    cursor: pointer;
-  
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); 
-  }
-  
-  .logosRedesSociais{
-    height: 63px;
-    width: 180px;
-  
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .criarConta{
-    display: flex;
-    flex-direction: row;
-  }
-  
-  a{
-    font-family: "Poppins", sans-serif;
-    font-weight: lighter;
-    font-style: normal;
-    font-size: 16px;
-  }
-  
-  .criarContaP{
-    font-family: "Poppins", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 16px;
-  }
-  
+  height: 100vh;
+  width: 100%;
+
+  background-color: #2D5287;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.formulario {
+  height: 300px;
+  width: 310px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sessaoDeInputsLogin {
+  height: 200px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.sessaoDeInputs {
+  height: 200px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.Submit {
+  width: 310px;
+  height: 50px;
+
+  border-radius: 20px;
+  background-color: #2D5287;
+  color: #fff;
+
+  border: 1px solid #ccc;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 14px;
+  padding: 8px;
+
+  cursor: pointer;
+
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logosRedesSociais {
+  height: 63px;
+  width: 180px;
+
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.criarConta {
+  display: flex;
+  flex-direction: row;
+}
+
+a {
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 16px;
+
+}
+
+.criarContaP {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+}

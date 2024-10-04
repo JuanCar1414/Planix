@@ -7,6 +7,7 @@ import appleLogo from '../../imgs/appleLogo.png';
 import faceLogo from '../../imgs/faceLogo.png';
 import googleLogo from '../../imgs/googleLogo.png';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,15 +15,10 @@ function CriarConta() {
   const [email, setEmail] = useState('');
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
-  const [senhaConfirmacao, setSenhaConfirmacao] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento da página
-
-    if (senha !== senhaConfirmacao) {
-      alert("As senhas não conferem!");
-      return;
-    }
 
     const dadosCadastro = {
       Email: email,
@@ -40,12 +36,12 @@ function CriarConta() {
       });
 
       if (response.status === 201) {
-        alert("Cadastro realizado com sucesso!");
         // Aqui você pode redirecionar o usuário ou limpar os campos, se desejar
         setEmail('');
         setNomeUsuario('');
         setSenha('');
-        setSenhaConfirmacao('');
+
+        navigate('/login');
       } else {
         alert("Ocorreu um erro no cadastro. Tente novamente.");
       }
@@ -85,15 +81,6 @@ function CriarConta() {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
-          <InputsEBotao
-            placeholder='Confirme sua Senha'
-            className='inputs'
-            largura='310px'
-            altura='30px'
-            type='password'
-            value={senhaConfirmacao}
-            onChange={(e) => setSenhaConfirmacao(e.target.value)}
-          />
           <input type="submit" id='Submit' value='Enviar'></input>
         </form>
         <div className='logosRedesSociais'>
@@ -106,6 +93,9 @@ function CriarConta() {
           <DivCircular>
             <img src={faceLogo} height='30px' width='30px' alt='' />
           </DivCircular>
+        </div>
+        <div id='textoDeAtorizacao'>
+          <Texto peso='10' tamanho='8px'>Ao se cadastrar, você concorda com a coleta e uso de seus dados pessoais para gerenciar sua conta e melhorar sua experiência. Seus dados podem ser compartilhados com parceiros para fins específicos, e você pode acessá-los ou excluí-los a qualquer momento. Ao clicar em "Cadastrar", você aceita nossos termos. Se não concordar, não prossiga.</Texto>
         </div>
       </Card>
     </div>

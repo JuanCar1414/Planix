@@ -8,10 +8,13 @@ import appleLogo from '../../imgs/appleLogo.png';
 import faceLogo from '../../imgs/faceLogo.png';
 import googleLogo from '../../imgs/googleLogo.png';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
+  const [mensagem, setMensagem] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento da página
@@ -31,16 +34,15 @@ function Login() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        alert(data.msg); // Mensagem de sucesso do servidor
+        navigate('/');
         // Aqui você pode armazenar o token ou redirecionar o usuário
       } else {
-        const errorData = await response.json();
-        alert(errorData.message); // Mensagem de erro do servidor
+        const data = await response.json();
+        setMensagem(data.message);
       }
     } catch (error) {
-      console.error("Erro ao realizar o login:", error);
-      alert("Ocorreu um erro no login. Tente novamente.");
+      setMensagem('Erro ao entrar no perfil.');
+      console.error(error);
     }
   };
 
@@ -48,8 +50,12 @@ function Login() {
     <>
       <Card altura='500px' largura='400px'>
         <Texto peso='10' tamanho='26px'>Seja Bem-Vindo Ao Planix</Texto>
+        <Texto peso='16' tamanho='16px'>Comece sua nova jornada no planejamento</Texto>
         <form className='formulario' onSubmit={handleSubmit}>
-          <div className='sessaoDeInputs'>
+          <div className='sessaoDeInputsLogin'>
+            <div id='msgTemp'>
+              {mensagem && <Texto peso='16' tamanho='16px' cor='#ff0000'>{mensagem}</Texto>}
+            </div>
             <InputsEBotao
               placeholder='E-mail'
               className='inputs'
@@ -63,16 +69,9 @@ function Login() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
-            <InputsEBotao
-              placeholder='Confirmar senha'
-              className='inputs'
-              type='password'
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-            />
           </div>
 
-          <a href=''>Esqueceu a Senha...</a>
+          <Link to={'/esquecisenha'}><a>Esqueceu a Senha...</a></Link>
 
           <input type="submit" className='Submit' value='Enviar'></input>
         </form>
