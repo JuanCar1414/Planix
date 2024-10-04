@@ -14,6 +14,7 @@ function TelaInicio() {
 
     return (
         <div className="App">
+            
             <div id="corpoInicio">
                 <img src={logoProjeto} alt="" height='200px' width='350px' />
                 <div class='btns'>

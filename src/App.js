@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<TelaInicio></TelaInicio>}></Route>
+        <Route path='/' element={<NavBar></NavBar>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/cadastro' element={<CriarConta></CriarConta>}></Route>
         <Route path='/esquecisenha' element={<EsqueceuSenha></EsqueceuSenha>}></Route>
