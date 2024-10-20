@@ -7,7 +7,7 @@ import appleLogo from '../../imgs/appleLogo.png';
 import faceLogo from '../../imgs/faceLogo.png';
 import googleLogo from '../../imgs/googleLogo.png';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -27,7 +27,7 @@ function CriarConta() {
     };
 
     try {
-      const response = await fetch('http://localhost:1414/cadastro', {
+      const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/cadastro', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -52,9 +52,15 @@ function CriarConta() {
   };
 
   return (
-    <div id='corpoCriarConta'>
+    <div id='corpo'>
       <Card altura='500px' largura='400px'>
-        <Texto peso='10' tamanho='26px'>Crie sua Conta</Texto>
+          <Link to={"/login"}><InputsEBotao
+            id='btnDeVoltarEsqSenha'
+            largura='40px'
+            altura='40px'
+            type='button'
+          /></Link>
+          <Texto peso='10' tamanho='26px'>Crie sua Conta</Texto>
         <form id='formularioCriarConta' onSubmit={handleSubmit}>
           <InputsEBotao
             placeholder='E-mail'

@@ -21,11 +21,11 @@ function Login() {
 
     const dadosLogin = {
       Email: email,
-      senha: senha // Certifique-se de usar 'senha' aqui para corresponder ao seu backend
+      Senha: senha // Certifique-se de usar 'senha' aqui para corresponder ao seu backend
     };
 
     try {
-      const response = await fetch('http://localhost:1414/login', {
+      const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

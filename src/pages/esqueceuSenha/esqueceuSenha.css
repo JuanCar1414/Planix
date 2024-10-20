@@ -1,5 +1,5 @@
-#corpoEsquceuSenha {
-    height: 100vh;
+#corpo{
+    height: 100%;
     width: 100%;
 
     background-color: #2D5287;
@@ -8,6 +8,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 
 }
 
@@ -68,3 +70,26 @@
     justify-content: center;
     align-items: center;
 }
+
+#btnDeVoltarEsqSenha{
+    background-color: #2D5186;
+
+    background-image: url('../../imgs/arrowBackIcon.png');
+    background-size: cover;
+    position: absolute;
+
+    left: 20px;
+}
+
+#btnDeVoltarEsqSenha:hover{
+    background-color: #3d6baf;
+
+    cursor: pointer;
+
+    background-image: url('../../imgs/arrowBackIcon.png');
+    background-size: cover;
+    position: absolute;
+
+    left: 20px;
+}
+

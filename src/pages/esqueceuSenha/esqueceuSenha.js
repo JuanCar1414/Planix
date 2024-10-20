@@ -4,6 +4,7 @@ import Card from '../../componentes/Card';
 import Texto from '../../componentes/Texto';
 import InputsEBotao from '../../componentes/InputsEBotao';
 import imgEsueceuSenha from '../../imgs/imgEsquecerSenha.png';
+import { Link } from 'react-router-dom';
 
 export default function EsqueceuSenha() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function EsqueceuSenha() {
         }
 
         try {
-            const response = await fetch('http://localhost:1414/esqueci-senha', {
+            const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/esqueci-senha', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,10 +41,19 @@ export default function EsqueceuSenha() {
     };
 
     return (
-        <div id='corpoEsquceuSenha'>
+        <div id='corpo'>
             <Card altura='500px' largura='400px'>
-                <Texto peso='10' tamanho='26px'>Esqueci minha senha...</Texto>
-                <img src={imgEsueceuSenha} height='209px' width='309px' alt='' />
+                <div id='parteSuperiorEsqueciSenha'>
+                    <Link to={"/login"}><InputsEBotao
+                        id='btnDeVoltarEsqSenha'
+                        largura='40px'
+                        altura='40px'
+                        type='button'
+                    /></Link>
+                    <Texto peso='10' tamanho='26px' id='txtEsqueciSenha'>Esqueci minha senha...</Texto>
+                </div>
+
+                <img src={imgEsueceuSenha} height='180px' width='280px' alt='' />
                 <div id='msgTemp'>
                     {mensagem && <Texto peso='16' tamanho='16px' cor='#ff0000'>{mensagem}</Texto>}
                 </div>

@@ -1,5 +1,5 @@
-#corpoCriarConta {
-  height: 100vh;
+#corpo{
+  height: 100px;
   width: 100%;
 
   background-color: #2D5287;
@@ -8,6 +8,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  
+
+  position: relative;
 
 }
 
