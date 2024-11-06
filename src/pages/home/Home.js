@@ -35,6 +35,9 @@ export default function Home() {
                             </div>
                         </div>
                     </Card>
+                    <div id='divisao'>
+                        <div id='linhaDiv'></div>
+                    </div>
                     <div id='mainEcono'>
                         <div id='textos'>
                             <Texto tamanho='32px' className='dataHoraNomeHome' cor='#2D5186' peso='500'>Suas Economias</Texto>
@@ -47,7 +50,7 @@ export default function Home() {
                                     <img src={logoCarteira} height="35px" width="35px" alt="" />
                                 </div>
                                 <div id='corpoEco'>
-
+                                    <Texto tamanho='18px'>Balanço</Texto>
                                 </div>
                             </div>
                             <div id='boxDeEco'>
@@ -55,7 +58,24 @@ export default function Home() {
                                     <Texto tamanho='32px' className='dataHoraNomeHome' cor='#2D5186' peso='500'>Ganhos</Texto>
                                     <img src={logoDinheiro} height="35px" width="35px" alt="" />
                                 </div>
-                                <div id='corpoEco'></div>
+                                <div id='corpoEco'>
+                                    <Texto tamanho='18px'>Principal receita</Texto>
+                                    <div id='boxDeValores'>
+                                        <div id='boxDeValoresHeaderLgnd'>
+                                            <Texto tamanho='15px' cor='#fff' peso='bolder'>Salário</Texto>
+                                            <Texto tamanho='15px' cor='#fff' peso='bolder'>Ganhos</Texto>
+                                        </div>
+                                        <div id='boxDeValoresHeader'>
+                                            <Texto tamanho='15px' cor='#000'>15042</Texto>
+                                            <Texto tamanho='15px' cor='#000'>17% - 1231</Texto>
+                                        </div>
+                                        <Texto tamanho='18px'>Principal receita</Texto>
+                                        <div id='boxDeValoresHeaderGst'>
+                                            <Texto tamanho='26px' cor='#2D5186' className='dataHoraNomeHome' peso='400'>Stream</Texto>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </Card>
 
