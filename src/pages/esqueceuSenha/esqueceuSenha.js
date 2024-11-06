@@ -41,7 +41,7 @@ export default function EsqueceuSenha() {
     };
 
     return (
-        <div id='corpo'>
+        <div id='corpoEsqSenha'>
             <Card altura='500px' largura='400px'>
                 <div id='parteSuperiorEsqueciSenha'>
                     <Link to={"/login"}><InputsEBotao

@@ -4,7 +4,7 @@ import fotoPerfil from '../../imgs/gaxinimEmoji.png';
 import Texto from '../Texto';
 import './Header.css';
 import DivCircular from '../DivCircular';
-import PerfilModal from '../Modals/PerfilModal/PerfilModal';
+import PerfilModal from '../Modals/PerfilModal';
 import { useState } from 'react';
 
 

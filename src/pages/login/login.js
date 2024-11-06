@@ -47,7 +47,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div id='corpoLogin'>
       <Card altura='500px' largura='400px'>
         <Texto peso='10' tamanho='26px'>Seja Bem-Vindo Ao Planix</Texto>
         <Texto peso='16' tamanho='16px'>Comece sua nova jornada no planejamento</Texto>
@@ -90,7 +90,7 @@ function Login() {
           <p className='criarContaP'>Não tem uma conta ainda? <Link to={'/cadastro'}>Crie sua Conta</Link></p>
         </div>
       </Card>
-    </>
+    </div>
   );
 }
 

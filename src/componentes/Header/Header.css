@@ -1,7 +1,8 @@
 #header {
-    position: fixed;
-    top: 0px;
-    left: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
 
     display: flex;
     flex-direction: row;
@@ -12,7 +13,9 @@
     background-color: #f8f8f8;
 
     height: 70px;
-    width: 1400px;
+    width: 100%;
+
+
 }
 
 #txtModos {
@@ -85,18 +88,18 @@
     transform: translate3d(0, 0.2em, 0);
 }
 
-#divPerfil{
+#divPerfil {
     display: flex;
     justify-content: center;
     align-items: center;
- 
+
     border-radius: 100%;
     background-color: #FCF8F8;
- 
+
     height: 50px;
     width: 50px;
 }
 
-#divPerfil:hover{
+#divPerfil:hover {
     cursor: pointer;
 }
