@@ -5,6 +5,7 @@ import logoConfig from '../../imgs/configPerfilModal.png';
 import logoSair from '../../imgs/logoSairModal.png';
 import logoTarefa from '../../imgs/tarefaLogo.png';
 import Texto from '../Texto';
+import { Link } from 'react-router-dom';
 
 const styles = {
     perfilModal: {
@@ -12,10 +13,11 @@ const styles = {
         top: '73px',
         right: '15px',
         width: '290px',
-        height: '360px',
+        height: '330px',
         backgroundColor: '#F8F8F8',
         borderRadius: '10%',
         padding: '8px',
+        border: '1.5px solid #d1d1d1'
     },
     fotoModalPerfil: {
         display: 'flex',
@@ -34,7 +36,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderBottom: '2px solid black',
+        borderBottom: '2px solid #d1d1d1',
     },
     txtConfigPerfil: {
         height: '40px',
@@ -43,11 +45,14 @@ const styles = {
         flexDirection: 'row',
         alignItems: 'center',
         padding: '3.2px',
-        cursor: 'pointer',
     },
     txtSair: {
         width: '100%',
-        borderBottom: '2px solid black',
+        borderBottom: '2px solid #d1d1d1',
+    },
+
+    linksPerfil: {
+        textDecoration: 'none',
     },
 };
 
@@ -63,24 +68,34 @@ export default function PerfilModal({ isOpen }) {
                     <Texto peso="600" tamanho="15px" cor="#555">exampleEmail@lorinIpsum.com</Texto>
                 </div>
                 <div id="configPerfi">
+
                     <div style={styles.txtConfigPerfil}>
                         <img src={logoPerfil} height="20px" width="20px" alt="" />
-                        <Texto peso="normal" tamanho="16px" cor="#555">Perfil</Texto>
+                        <Link to={null} style={styles.linksPerfil}>
+                            <Texto peso="normal" tamanho="16px" cor="#000" margemLeft="8px">Perfil</Texto>
+                        </Link>
                     </div>
+
                     <div style={styles.txtConfigPerfil}>
                         <img src={logoConfig} height="20px" width="20px" alt="" />
-                        <Texto peso="normal" tamanho="16px" cor="#555">Configuração</Texto>
+                        <Link to={null} style={styles.linksPerfil}>
+                            <Texto peso="normal" tamanho="16px" cor="#000" margemLeft="8px">Configuração</Texto>
+                        </Link>
                     </div>
                     <div style={{ ...styles.txtConfigPerfil, ...styles.txtSair }}>
                         <img src={logoSair} height="20px" width="20px" alt="" />
-                        <Texto peso="normal" tamanho="16px" cor="#555">Sair</Texto>
+                        <Link to={null} style={styles.linksPerfil}>
+                            <Texto peso="normal" tamanho="16px" cor="#000" margemLeft="8px">Sair</Texto>
+                        </Link>
                     </div>
                     <div style={styles.txtConfigPerfil}>
                         <img src={logoTarefa} height="20px" width="20px" alt="" />
-                        <Texto peso="normal" tamanho="16px" cor="#555">Minhas Tarefas</Texto>
+                        <Link to={null} style={styles.linksPerfil}>
+                            <Texto peso="normal" tamanho="16px" cor="#000" margemLeft="8px">Minhas Tarefas</Texto>
+                        </Link>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 

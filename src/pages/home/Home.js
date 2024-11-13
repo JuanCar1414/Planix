@@ -6,6 +6,7 @@ import logoTarefa from '../../imgs/tarefaLogo.png';
 import logoCarteira from '../../imgs/carteiraLogo.png';
 import logoDinheiro from '../../imgs/dinheiroLogo.png';
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     return (
@@ -23,16 +24,20 @@ export default function Home() {
                             <Texto tamanho='18px' className='dataHoraNomeHome'>Organize-as aqui </Texto>
                         </div>
                         <div className='opcTarefas'>
-                            <div id='iconTarefa'>
-                                <img src={addLogo} height="23px" width="23px" alt="" />
-                                <Texto tamanho='20px' cor='#000'>Tarefas</Texto>
-                            </div>
+                            <Link to={null}>
+                                <div id='iconTarefa'>
+                                    <img src={addLogo} height="23px" width="23px" alt="" />
+                                    <Texto tamanho='20px' cor='#000'>Adicionar Tarefas</Texto>
+                                </div>
+                            </Link>
                         </div>
                         <div className='opcTarefas'>
-                            <div id='iconTarefaAtz'>
-                                <img src={logoTarefa} height="23px" width="23px" alt="" />
-                                <Texto tamanho='20px' cor='#000'>Marcar Tarefa</Texto>
-                            </div>
+                            <Link to={null}>
+                                <div id='iconTarefaAtz'>
+                                    <img src={logoTarefa} height="23px" width="23px" alt="" />
+                                    <Texto tamanho='20px' cor='#000'>Marcar Tarefa</Texto>
+                                </div>
+                            </Link>
                         </div>
                     </Card>
                     <div id='divisao'>
@@ -48,9 +53,35 @@ export default function Home() {
                                 <div id='headerEco'>
                                     <Texto tamanho='32px' className='dataHoraNomeHome' cor='#2D5186' peso='500'>Gastos</Texto>
                                     <img src={logoCarteira} height="35px" width="35px" alt="" />
+
+
                                 </div>
                                 <div id='corpoEco'>
-                                    <Texto tamanho='18px'>Balanço</Texto>
+                                    <div id='boxDeValores'>
+                                        <div id='txtsGastosVencimentos'>
+                                            <Texto tamanho='18px'>Principal receita</Texto>
+                                            <Link to={null} className='txtCentro'>
+                                                <Texto tamanho='15px' cor='#2D5186'>Vizualizar vencimentos</Texto>
+                                            </Link>
+                                        </div>
+                                        <div id='boxDeValoresConjunto'>
+                                            <div id='boxDeValoresHeaderLgnd'>
+                                                <Texto tamanho='15px' cor='#fff' peso='bolder'>Salário</Texto>
+                                                <Texto tamanho='15px' cor='#fff' peso='bolder'>Ganhos</Texto>
+                                            </div>
+                                            <div id='boxDeValoresHeader'>
+                                                <Texto tamanho='15px' cor='#000'>15042</Texto>
+                                                <Texto tamanho='15px' cor='#000'>17% - 1231</Texto>
+                                            </div>
+                                        </div>
+                                        <Texto tamanho='18px'>Principal receita</Texto>
+                                        <div id='boxDeValoresHeaderGst'>
+                                            <Texto tamanho='26px' cor='#2D5186' className='dataHoraNomeHome' peso='400'>Stream</Texto>
+                                        </div>
+                                        <Link to={null} className='txtCentro'>
+                                            <Texto tamanho='16px' >Adicionar Gasto</Texto>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                             <div id='boxDeEco'>
@@ -59,26 +90,29 @@ export default function Home() {
                                     <img src={logoDinheiro} height="35px" width="35px" alt="" />
                                 </div>
                                 <div id='corpoEco'>
-                                    <Texto tamanho='18px'>Principal receita</Texto>
                                     <div id='boxDeValores'>
-                                        <div id='boxDeValoresHeaderLgnd'>
-                                            <Texto tamanho='15px' cor='#fff' peso='bolder'>Salário</Texto>
-                                            <Texto tamanho='15px' cor='#fff' peso='bolder'>Ganhos</Texto>
-                                        </div>
-                                        <div id='boxDeValoresHeader'>
-                                            <Texto tamanho='15px' cor='#000'>15042</Texto>
-                                            <Texto tamanho='15px' cor='#000'>17% - 1231</Texto>
+                                        <Texto tamanho='18px' >Principal receita</Texto>
+                                        <div id='boxDeValoresConjunto'>
+                                            <div id='boxDeValoresHeaderLgnd'>
+                                                <Texto tamanho='15px' cor='#fff' peso='bolder'>Salário</Texto>
+                                                <Texto tamanho='15px' cor='#fff' peso='bolder'>Ganhos</Texto>
+                                            </div>
+                                            <div id='boxDeValoresHeader'>
+                                                <Texto tamanho='15px' cor='#000'>15042</Texto>
+                                                <Texto tamanho='15px' cor='#000'>17% - 1231</Texto>
+                                            </div>
                                         </div>
                                         <Texto tamanho='18px'>Principal receita</Texto>
                                         <div id='boxDeValoresHeaderGst'>
                                             <Texto tamanho='26px' cor='#2D5186' className='dataHoraNomeHome' peso='400'>Stream</Texto>
                                         </div>
-
+                                        <Link to={null} className='txtCentro'>
+                                            <Texto tamanho='16px' >Adicionar Gasto</Texto>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                         </Card>
-
                     </div>
                 </div>
             </div>

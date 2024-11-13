@@ -1,0 +1,10 @@
+#txtAddTarefa{
+    height: 63px;
+    width: 95%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: 2px solid #d1d1d1;
+}
