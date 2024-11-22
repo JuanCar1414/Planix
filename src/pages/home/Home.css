@@ -204,3 +204,12 @@
     justify-content: space-between;
     align-items: center;
 }
+
+#cardTarefaAddModal{
+    position: absolute;
+
+    top: 45%;
+    right: 20%;
+
+}
+

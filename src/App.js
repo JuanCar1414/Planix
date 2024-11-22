@@ -4,10 +4,9 @@ import CriarConta from './pages/criarConta/criarConta';
 import Login from './pages/login/login';
 import TelaInicio from './pages/telaInicio/telaInicio';
 import EsqueceuSenha from './pages/esqueceuSenha/esqueceuSenha';
-import Header from './componentes/Header/Header';
+
 import Home from './pages/home/Home';
-import AddTarefaModal from './componentes/Modals/AdicionarTarefa/AdicionarTarefaModal';
-import DropdownButton from './componentes/Modals/AdicionarTarefa/AdicionarTarefaModal';
+
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path='/esquecisenha' element={<EsqueceuSenha></EsqueceuSenha>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
 
-        <Route path='/testeComp' element={<DropdownButton></DropdownButton>}></Route>
       </Routes>
     </BrowserRouter>
 
