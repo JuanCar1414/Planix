@@ -42,7 +42,7 @@ export default function EsqueceuSenha() {
 
     return (
         <div id='corpoEsqSenha'>
-            <Card altura='500px' largura='400px'>
+            <Card altura='500px' largura='400px' id='cardForm'>
                 <div id='parteSuperiorEsqueciSenha'>
                     <Link to={"/login"}><InputsEBotao
                         id='btnDeVoltarEsqSenha'

@@ -1,15 +1,13 @@
-#corpo{
+#corpo {
   height: 100vh;
   width: 100%;
 
-  background-color: #2D5287;
+  background-color: #fff;
   display: flex;
 
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  
 
   position: relative;
 
@@ -60,6 +58,10 @@
   margin-bottom: 8px;
 }
 
-#textoDeAtorizacao{
+#textoDeAtorizacao {
   text-align: center;
+}
+
+#cardForm {
+  border: 0.25px solid #2D5287;
 }

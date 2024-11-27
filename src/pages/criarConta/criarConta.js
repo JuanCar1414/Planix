@@ -52,9 +52,9 @@ function CriarConta() {
   };
 
   return (
-    <div id='corpoEsqSenha'>
-      <Card altura='500px' largura='400px'>
-          <Link to={"/login"}><InputsEBotao
+    <div id='corpo'>
+      <Card altura='500px' largura='400px' id='cardForm'>
+          <Link to={"/"}><InputsEBotao
             id='btnDeVoltarEsqSenha'
             largura='40px'
             altura='40px'

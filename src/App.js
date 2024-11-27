@@ -8,7 +8,6 @@ import EsqueceuSenha from './pages/esqueceuSenha/esqueceuSenha';
 import Home from './pages/home/Home';
 
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +16,10 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/cadastro' element={<CriarConta></CriarConta>}></Route>
         <Route path='/esquecisenha' element={<EsqueceuSenha></EsqueceuSenha>}></Route>
-        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/home/:NomeUsuario' element={<Home />} />
+
+
+        <Route path='/testeComp' element={<null />} />
 
       </Routes>
     </BrowserRouter>

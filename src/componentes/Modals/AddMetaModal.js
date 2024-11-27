@@ -3,7 +3,7 @@ import Card from "../Card";
 import Texto from "../Texto";
 import InputsEBotao from "../InputsEBotao";
 
-export default function AddTarefaModal({ isOpen, onClose }) {
+export default function AddMetaModal({ isOpen, onClose }) {
     const [descricao, setDescricao] = useState('');
 
     const handleDescricaoChange = (e) => {
@@ -146,7 +146,7 @@ export default function AddTarefaModal({ isOpen, onClose }) {
                         zIndex: 1001,
                     }}>
                     <div style={styles.txtAddTarefa}>
-                        <Texto tamanho="21px" cor="#2D5186">Adicionar Tarefa</Texto>
+                        <Texto tamanho="21px" cor="#2D5186">Adicionar Metas</Texto>
                         <button onClick={onClose} style={styles.closeButton}>
                             <Texto tamanho="20px" peso="light">X</Texto>
                         </button>
@@ -155,7 +155,7 @@ export default function AddTarefaModal({ isOpen, onClose }) {
                         {/* Parte superior */}
                         <div style={styles.parteSuperior}>
                             <div style={styles.campoNome}>
-                                <Texto tamanho="18px" cor="#2D5186">Nome da Tarefa:</Texto>
+                                <Texto tamanho="18px" cor="#2D5186">Nome da Meta:</Texto>
                                 <InputsEBotao
                                     placeholder="Digite o nome"
                                     id="inputsModalAddValores"

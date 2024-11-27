@@ -2,7 +2,7 @@
     height: 100vh;
     width: 100%;
 
-    background-color: #2D5287;
+    background-color: #fff;
     display: flex;
 
     flex-direction: column;
@@ -72,7 +72,7 @@
 }
 
 #btnDeVoltarEsqSenha{
-    background-color: #2D5186;
+    background-color: #fff;
 
     background-image: url('../../imgs/arrowBackIcon.png');
     background-size: cover;
@@ -82,7 +82,7 @@
 }
 
 #btnDeVoltarEsqSenha:hover{
-    background-color: #3d6baf;
+    background-color: #fff;
 
     cursor: pointer;
 
@@ -92,4 +92,6 @@
 
     left: 20px;
 }
+
+
 

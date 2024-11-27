@@ -2,7 +2,7 @@
   height: 100vh;
   width: 100%;
 
-  background-color: #2D5287;
+  background-color: #fff;
   display: flex;
 
   flex-direction: column;
@@ -92,4 +92,8 @@ a {
   font-weight: normal;
   font-style: normal;
   font-size: 16px;
+}
+
+#cardForm{
+  border: 0.25px solid #2D5287;
 }

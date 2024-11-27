@@ -7,8 +7,8 @@ import DivCircular from '../../componentes/DivCircular';
 import appleLogo from '../../imgs/appleLogo.png';
 import faceLogo from '../../imgs/faceLogo.png';
 import googleLogo from '../../imgs/googleLogo.png';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import logoPlanix from '../../imgs/logoLoginPlanix.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -25,6 +25,7 @@ function Login() {
     };
 
     try {
+      // Realizando a requisição POST para o backend
       const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/login', {
         method: 'POST',
         headers: {
@@ -34,11 +35,22 @@ function Login() {
       });
 
       if (response.ok) {
-        navigate('/');
-        // Aqui você pode armazenar o token ou redirecionar o usuário
+        const data = await response.json();
+        const NomeUsuario = data.NomeUsuario; // Agora obtém o NomeUsuario da resposta
+
+        // Verifica se o NomeUsuario foi retornado corretamente
+        if (NomeUsuario) {
+          // Armazene o nome do usuário no localStorage para persistência
+          localStorage.setItem('NomeUsuario', NomeUsuario);
+
+          // Redireciona para a página Home, incluindo o nome na URL
+          navigate(`/home/${NomeUsuario}`);
+        } else {
+          setMensagem('Nome de usuário não encontrado na resposta.');
+        }
       } else {
         const data = await response.json();
-        setMensagem(data.message);
+        setMensagem(data.message || 'Erro ao realizar login');
       }
     } catch (error) {
       setMensagem('Erro ao entrar no perfil.');
@@ -48,9 +60,8 @@ function Login() {
 
   return (
     <div id='corpoLogin'>
-      <Card altura='500px' largura='400px'>
-        <Texto peso='10' tamanho='26px'>Seja Bem-Vindo Ao Planix</Texto>
-        <Texto peso='16' tamanho='16px'>Comece sua nova jornada no planejamento</Texto>
+      <Card altura='500px' largura='400px' id='cardForm'>
+        <img src={logoPlanix} height='90px'alt='' />
         <form className='formulario' onSubmit={handleSubmit}>
           <div className='sessaoDeInputsLogin'>
             <div id='msgTemp'>
