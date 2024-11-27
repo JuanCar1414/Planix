@@ -6,6 +6,7 @@ import TelaInicio from './pages/telaInicio/telaInicio';
 import EsqueceuSenha from './pages/esqueceuSenha/esqueceuSenha';
 
 import Home from './pages/home/Home';
+import VisualizarTarefaMetaModal from './componentes/Modals/VisualizarTarefaModal';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Route path='/home/:NomeUsuario' element={<Home />} />
 
 
-        <Route path='/testeComp' element={<null />} />
+        <Route path='/testeComp' element={<VisualizarTarefaMetaModal />} />
 
       </Routes>
     </BrowserRouter>

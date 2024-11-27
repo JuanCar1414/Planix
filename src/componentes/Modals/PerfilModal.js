@@ -64,7 +64,7 @@ export default function PerfilModal({ isOpen }) {
     const fetchUsuario = async () => {
         try {
             // Corrigindo o URL da requisição e passando NomeUsuario corretamente
-            const response = await fetch(`https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/${NomeUsuario}/visualizar`);
+            const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/visualizar`);
             const data = await response.json();
 
             if (response.ok) {

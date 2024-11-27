@@ -17,6 +17,8 @@ import AddMetaModal from '../../componentes/Modals/AddMetaModal.js';
 import Calendar from '../../componentes/Modals/CalendarioModal.js';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import VisualizarMetaModal from '../../componentes/Modals/VisualizarMetaModal.js';
+import VisualizarTarefaModal from '../../componentes/Modals/VisualizarTarefaModal.js';
 
 export default function Home() {
     const { NomeUsuario } = useParams();  // Captura o nome diretamente da URL
@@ -63,6 +65,8 @@ export default function Home() {
     const [openModalAddTar, setOpenModalAddTar] = useState(false);
     const [openModalAddMeta, setOpenModalAddMeta] = useState(false);
     const [openModalCalendar, setOpenModalCalendar] = useState(false);
+    const [openModalVisualizarTarefa, setOpenModalVisualizarTarefa] = useState(false);
+    const [openModalVisualizarMeta, setOpenModalVisualizarMeta] = useState(false);
     const [openPerfilModal, setOpenPerfilModal] = useState(false); // Estado para controlar a abertura do modal de perfil
 
     // Função para fechar o modal de "Adicionar Gasto/Ganho"
@@ -87,6 +91,13 @@ export default function Home() {
         setOpenModalCalendar(false);
     };
 
+    const handleCloseVisualizarTarefaModal = () => {
+        setOpenModalVisualizarTarefa(false);
+    };
+
+    const handleCloseVisualizarMetaModal = () => {
+        setOpenModalVisualizarMeta(false);
+    };
 
     return (
         <>
@@ -132,8 +143,8 @@ export default function Home() {
                                         <div id="iconTarefaAtzDeBaixo">
                                             <div id='txtMetasTarefas'>
                                                 <img src={logoTarefa} height="23px" width="23px" alt="" />
-                                                <button onClick={() => setOpenModalAddTar(true)} id='btnAddGanhoGasto'>
-                                                    <Texto tamanho="20px" cor="#000">Vizualizar Tarefa</Texto>
+                                                <button onClick={() => setOpenModalVisualizarTarefa(true)} id='btnAddGanhoGasto'>
+                                                    <Texto tamanho="20px" cor="#000">Vizualizar Tarefas</Texto>
                                                 </button>
                                             </div>
                                         </div>
@@ -163,9 +174,10 @@ export default function Home() {
                                         <div id="iconTarefaAtzDeBaixo">
                                             <div id='txtMetasTarefas'>
                                                 <img src={logoTarefa} height="23px" width="23px" alt="" />
-                                                <button onClick={() => setOpenModalAddMeta(true)} id='btnAddGanhoGasto'>
+                                                <button onClick={() => setOpenModalVisualizarMeta(true)} id='btnAddGanhoGasto'>
                                                     <Texto tamanho="20px" cor="#000">Vizualizar Metas</Texto>
                                                 </button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +194,7 @@ export default function Home() {
                         </div>
                     </Card>
                     <div id="txtTarefa">
-                        <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Minhas Tarefas e Metas Concluidas</Texto>
+                        <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Minhas Tarefas e Metas Recentes</Texto>
 
                     </div>
                     <div id="divisao">
@@ -269,7 +281,11 @@ export default function Home() {
 
             {openModalAddMeta && <AddMetaModal isOpen={openModalAddMeta} onClose={handleCloseMetaModal} />}
 
+            {openModalVisualizarTarefa && <VisualizarTarefaModal isOpen={openModalVisualizarTarefa} onClose={handleCloseVisualizarTarefaModal} />}
+
             {openModalCalendar && <Calendar isOpen={openModalCalendar} onClose={handleCloseCalendarModal} />}
+
+            {openModalVisualizarMeta && <VisualizarMetaModal isOpen={openModalVisualizarMeta} onClose={handleCloseVisualizarMetaModal} />}
         </>
     );
 }

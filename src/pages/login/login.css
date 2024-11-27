@@ -61,7 +61,7 @@
 
   cursor: pointer;
 
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .logosRedesSociais {
@@ -94,6 +94,24 @@ a {
   font-size: 16px;
 }
 
-#cardForm{
-  border: 0.25px solid #2D5287;
+#msgAlerta{
+  height: 10px;
+margin-top: 40px;
 }
+
+#logoPlanix{
+  position: absolute;
+  top: 12%;
+}
+
+#cardForm{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 80px;
+}
+
+

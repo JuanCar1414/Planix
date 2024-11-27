@@ -43,7 +43,7 @@
 
   cursor: pointer;
 
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .logosRedesSociais {
@@ -60,8 +60,4 @@
 
 #textoDeAtorizacao {
   text-align: center;
-}
-
-#cardForm {
-  border: 0.25px solid #2D5287;
 }

@@ -35,6 +35,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
             padding: '8px',
             marginBottom: '10px',
             cursor: 'pointer',
+            backgroundColor: '#2D5287',
+            color: "white",
         },
         dropdownMenu: {
             listStyle: 'none',
@@ -42,8 +44,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
             margin: '0',
             position: 'absolute',
             top: '12%',
-            right: '17.4%',
-            backgroundColor: 'white',
+            right: '14.2%',
+            backgroundColor: '#F8F8F8',
             border: '1px solid #d1d1d1',
             borderRadius: '8px',
             boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
@@ -56,6 +58,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
             justifyContent: 'center',
             alignItems: 'center',
             border: '1px solid #d1d1d1',
+            backgroundColor: '#2D5287',
+            color: "white",
             borderRadius: '40px',
             padding: '8px',
             margin: '9px',
@@ -67,7 +71,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'space-around',
+            justifyContent: 'center',
             padding: '8px',
         },
         campoDeValor: {
@@ -82,15 +86,17 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
         inputsModalAddValores: {
             height: '40%',
             width: '100%',
+            backgroundColor: '#fff',
         },
         submitModal: {
-            width: '110px',
+            width: '220px',
             height: '50px',
             borderRadius: '20px',
             backgroundColor: '#2D5287',
             color: '#fff',
             border: '1px solid #ccc',
             fontFamily: '"Poppins", sans-serif',
+            marginTop: "20px",
             fontWeight: 'lighter',
             fontStyle: 'normal',
             fontSize: '14px',
@@ -127,7 +133,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Fundo semi-transparente
                 zIndex: 1000,  // Garante que o fundo fique atrás do modal
             }}>
-                <Card altura="550px" largura="754px" cor="#fefefe" borda="solid #d1d1d1 2px;" radius="50px" id="cardTarefaAddModal"
+                <Card altura="550px" largura="550px" cor="#F8F8F8" borda="solid #d1d1d1 2px;" radius="50px" id="cardTarefaAddModal"
                     style={{
                         position: 'absolute',  // Posiciona o modal no centro da tela
                         top: '50%',  // Posição vertical centrada
@@ -168,7 +174,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                     </div>
                     <div style={styles.corpoAddTarefa}>
                         <div style={styles.campoDeValor}>
-                            <Texto tamanho="18px" cor="#2D5186">Valor:</Texto>
+                            <Texto tamanho="16px" cor="#2D5186">Valor:</Texto>
                             <InputsEBotao
                                 placeholder="Valor"
                                 id="inputsModalAddValores"
@@ -176,7 +182,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             />
                         </div>
                         <div style={styles.campoDeValor}>
-                            <Texto tamanho="18px" cor="#2D5186">Nome:</Texto>
+                            <Texto tamanho="16px" cor="#2D5186">Nome:</Texto>
                             <InputsEBotao
                                 placeholder="Nome"
                                 id="inputsModalAddValores"
@@ -184,7 +190,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             />
                         </div>
                         <div style={styles.campoDeValor}>
-                            <Texto tamanho="18px" cor="#2D5186">Descrição:</Texto>
+                            <Texto tamanho="16px" cor="#2D5186">Descrição:</Texto>
                             <InputsEBotao
                                 placeholder="Descrição"
                                 id="inputsModalAddValores"
@@ -192,7 +198,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             />
                         </div>
                         <div style={styles.campoDeValor}>
-                            <Texto tamanho="18px" cor="#2D5186">Tipo:</Texto>
+                            <Texto tamanho="16px" cor="#2D5186">Tipo:</Texto>
                             <InputsEBotao
                                 placeholder="Tipo"
                                 id="inputsModalAddValores"
@@ -200,14 +206,14 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             />
                         </div>
                         <div style={styles.campoDeValor}>
-                            <Texto tamanho="18px" cor="#2D5186">Mês:</Texto>
+                            <Texto tamanho="16px" cor="#2D5186">Mês:</Texto>
                             <InputsEBotao
                                 placeholder="Mês"
                                 id="inputsModalAddValores"
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
-                        <input type="submit" id="SubmitModal" value="Enviar" style={styles.submitModal}></input>
+                        <input type="submit" id="SubmitModal" value="Feito" style={styles.submitModal}></input>
                     </div>
                 </Card>
             </div>

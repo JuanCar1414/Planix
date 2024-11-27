@@ -14,6 +14,8 @@ const InputsEBotao = styled.input`
     font-style: normal;
     font-size: 16px;
     padding: 8px;
+    
+    
 
     &::placeholder {
         font-family: "Poppins", sans-serif;
@@ -21,9 +23,11 @@ const InputsEBotao = styled.input`
         font-style: normal;
         font-size: 12px;
         color: #ccc; 
+        padding: 4px;
+
     }
 
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 
 
 `

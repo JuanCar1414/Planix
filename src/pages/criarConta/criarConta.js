@@ -53,7 +53,7 @@ function CriarConta() {
 
   return (
     <div id='corpo'>
-      <Card altura='500px' largura='400px' id='cardForm'>
+      <Card altura='500px' largura='400px' id='cardFormCadastro'>
           <Link to={"/"}><InputsEBotao
             id='btnDeVoltarEsqSenha'
             largura='40px'
@@ -91,13 +91,13 @@ function CriarConta() {
         </form>
         <div className='logosRedesSociais'>
           <DivCircular>
-            <img src={appleLogo} height='35px' width='30px' alt='' />
+            <img src={appleLogo} height='25px' alt='' />
           </DivCircular>
           <DivCircular>
-            <img src={googleLogo} height='30px' width='30px' alt='' />
+            <img src={googleLogo} height='25px' alt='' />
           </DivCircular>
           <DivCircular>
-            <img src={faceLogo} height='30px' width='30px' alt='' />
+            <img src={faceLogo} height='25px' alt='' />
           </DivCircular>
         </div>
         <div id='textoDeAtorizacao'>

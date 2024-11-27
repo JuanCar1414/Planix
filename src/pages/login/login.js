@@ -26,7 +26,7 @@ function Login() {
 
     try {
       // Realizando a requisição POST para o backend
-      const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/login', {
+      const response = await fetch('https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,12 +60,12 @@ function Login() {
 
   return (
     <div id='corpoLogin'>
-      <Card altura='500px' largura='400px' id='cardForm'>
-        <img src={logoPlanix} height='90px'alt='' />
+      <Card altura='420px' largura='400px' id='cardForm'>
+      <img src={logoPlanix} height='90px'alt='' id='logoPlanix'/>
         <form className='formulario' onSubmit={handleSubmit}>
           <div className='sessaoDeInputsLogin'>
             <div id='msgTemp'>
-              {mensagem && <Texto peso='16' tamanho='16px' cor='#ff0000'>{mensagem}</Texto>}
+              {mensagem && <Texto peso='100' tamanho='16px' cor='#ff0000' id='msgAlerta'>{mensagem}</Texto>}
             </div>
             <InputsEBotao
               placeholder='E-mail'
@@ -86,20 +86,21 @@ function Login() {
 
           <input type="submit" className='Submit' value='Enviar'></input>
         </form>
-        <div className='logosRedesSociais'>
-          <DivCircular>
-            <img src={appleLogo} height='35px' width='30px' alt='' />
-          </DivCircular>
-          <DivCircular>
-            <img src={googleLogo} height='30px' width='30px' alt='' />
-          </DivCircular>
-          <DivCircular>
-            <img src={faceLogo} height='30px' width='30px' alt='' />
-          </DivCircular>
-        </div>
         <div className='criarConta'>
           <p className='criarContaP'>Não tem uma conta ainda? <Link to={'/cadastro'}>Crie sua Conta</Link></p>
         </div>
+        <div className='logosRedesSociais'>
+          <DivCircular>
+            <img src={appleLogo} height='25px' alt='' />
+          </DivCircular>
+          <DivCircular>
+            <img src={googleLogo} height='25px' alt='' />
+          </DivCircular>
+          <DivCircular>
+            <img src={faceLogo} height='25px' alt='' />
+          </DivCircular>
+        </div>
+       
       </Card>
     </div>
   );

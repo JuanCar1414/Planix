@@ -8,8 +8,8 @@ const DivCircular = styled.div`
    border-radius: 100%;
    background-color: #FCF8F8;
 
-   height: 50px;
-   width: 50px;
+   height: ${props => props.altura || '50px'};
+    width: ${props => props.largura || '50px'};
 
    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); 
 `
