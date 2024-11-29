@@ -1,15 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, format, startOfDay } from 'date-fns';
 import Texto from '../Texto';
+import { useParams } from 'react-router-dom';
 
 export default function Calendar({ isOpen, onClose }) {
+    const { NomeUsuario } = useParams(); // Pega o nome do usuário diretamente da URL
     const [currentDate, setCurrentDate] = useState(startOfDay(new Date())); // Data atual normalizada
     const [selectedDate, setSelectedDate] = useState(null); // Data selecionada
     const [showModal, setShowModal] = useState(false); // Controla o modal
-    const [tasks, setTasks] = useState({
-        '2024-11-25': ['Reunião com a equipe', 'Enviar relatório', 'Enviar relatório'],
-        '2024-11-27': ['Revisar código', 'Planejar próximos passos'],
-    });
+    const [tasks, setTasks] = useState([]); // Estado para armazenar as tarefas por data
+    const [metas, setMetas] = useState([]); // Estado para armazenar as metas por data
+    const [loading, setLoading] = useState(false); // Indicador de carregamento
+    const [error, setError] = useState(null); // Armazena erro, se houver
+
+    // Buscar tarefas e metas para a data selecionada
+    useEffect(() => {
+        if (selectedDate) {
+            const fetchData = async () => {
+                setLoading(true);
+                setError(null);
+                try {
+                    // Buscando tarefas
+                    const tasksResponse = await fetch(
+                        `https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-tarefa?selectedDate=${selectedDate}`
+                    );
+                    const tasksData = await tasksResponse.json();
+
+                    // Buscando metas
+                    const metasResponse = await fetch(
+                        `https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-meta?selectedDate=${selectedDate}`
+                    );
+                    const metasData = await metasResponse.json();
+                    console.log("Metas Data:", metasData);
+
+                    if (tasksResponse.ok && metasResponse.ok) {
+                        setTasks(tasksData.Tarefa);   // Atualiza as tarefas no estado
+                        setMetas(metasData.Metas);    // Atualiza as metas no estado
+                    } else {
+                        setError('Erro ao buscar tarefas ou metas');
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar tarefas ou metas:', error);
+                    setError('Erro ao carregar tarefas ou metas');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchData();
+        }
+    }, [selectedDate, NomeUsuario]);
 
     const startMonth = startOfDay(startOfMonth(currentDate));
     const endMonth = startOfDay(endOfMonth(currentDate));
@@ -49,6 +88,16 @@ export default function Calendar({ isOpen, onClose }) {
         setShowModal(false);
         setSelectedDate(null);
     };
+
+    const filteredMetas = metas.filter((meta) => {
+        // Normaliza as duas datas para o início do dia para garantir que a comparação seja precisa
+        const metaDate = startOfDay(new Date(meta.Dia)); // Normaliza a data da meta
+        const selectedDateNormalized = startOfDay(new Date(selectedDate)); // Normaliza a data selecionada
+
+        // Comparar as duas datas de forma precisa (sem fusos horários)
+        return format(metaDate, 'yyyy-MM-dd') === format(selectedDateNormalized, 'yyyy-MM-dd');
+    });
+
 
     const styles = {
         calendarContainer: {
@@ -127,7 +176,7 @@ export default function Calendar({ isOpen, onClose }) {
         modalTitle: {
             fontSize: '18px',
             fontWeight: '600',
-            color: '#2D5186', // Azul semelhante ao Google Calendar
+            color: '#2D5186',
             marginBottom: '10px',
             textAlign: 'center',
         },
@@ -140,8 +189,9 @@ export default function Calendar({ isOpen, onClose }) {
         },
         taskItem: {
             padding: '5px 0',
-            textDecoration: 'underline', // Sublinhado nos itens
-            color: '#09101A',
+        },
+        metaItem: {
+            padding: '5px 0',
         },
         closeButton: {
             alignSelf: 'center',
@@ -154,7 +204,7 @@ export default function Calendar({ isOpen, onClose }) {
             fontSize: '14px',
         },
         noTasksMessage: {
-            color: '#757575', // Cinza claro para mensagens informativas
+            color: '#757575',
             fontStyle: 'italic',
             textDecoration: 'underline',
         },
@@ -162,32 +212,17 @@ export default function Calendar({ isOpen, onClose }) {
 
     return (
         isOpen && (
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                zIndex: 1000,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
+            <div style={styles.modalOverlay}>
                 <div style={styles.calendarContainer}>
+                    {/* Cabeçalho e navegação do calendário */}
                     <div style={styles.calendarHeader}>
                         <button style={styles.headerButton} onClick={handlePrevMonth}>◀</button>
-                        <Texto tamanho="24px" className="dataHoraNomeHome" cor="#2D5186">{format(currentDate, 'MMMM yyyy')}</Texto>
+                        <Texto tamanho="24px" cor="#2D5186">{format(currentDate, 'MMMM yyyy')}</Texto>
                         <button style={styles.headerButton} onClick={handleNextMonth}>▶</button>
                         <button onClick={onClose} style={styles.headerButton}>X</button>
                     </div>
-                    <div style={styles.daysGrid}>
-                        {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((day) => (
-                            <div key={day} style={styles.dayHeader}>
-                                {day}
-                            </div>
-                        ))}
-                    </div>
+
+                    {/* Geração dos dias do mês */}
                     <div style={styles.calendarGrid}>
                         {generateMonthDays().map((day, index) => {
                             const isOutsideMonth = format(day, 'MM') !== format(currentDate, 'MM');
@@ -208,20 +243,42 @@ export default function Calendar({ isOpen, onClose }) {
                             );
                         })}
                     </div>
+
+                    {/* Modal com as tarefas e metas */}
                     {showModal && (
                         <div style={styles.modalOverlay}>
                             <div style={styles.modalContent}>
                                 <div style={styles.modalTitle}>
-                                    Tarefas para {format(new Date(selectedDate + "T00:00:00"), 'dd MMMM yyyy')}
+                                    Tarefas e Metas para {format(new Date(selectedDate + "T00:00:00"), 'dd MMMM yyyy')}
                                 </div>
-                                {tasks[selectedDate] ? (
-                                    <ul style={styles.taskList}>
-                                        {tasks[selectedDate].map((task, index) => (
-                                            <li key={index} style={styles.taskItem}>{task}</li>
-                                        ))}
-                                    </ul>
+                                {loading ? (
+                                    <div>Carregando...</div> // Indicador de carregamento
+                                ) : error ? (
+                                    <div style={styles.noTasksMessage}>{error}</div> // Mensagem de erro
                                 ) : (
-                                    <div style={styles.noTasksMessage}>Não há tarefas para esta data.</div>
+                                    <>
+                                        {tasks.length > 0 && (
+                                            <ul style={styles.taskList}>
+                                                <Texto tamanho="24px" cor="#2D5186">Tarefas:</Texto>
+                                                {tasks.map((task, index) => (
+                                                    <li key={index} style={styles.taskItem}>{task.Nome}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                        {filteredMetas.length > 0 ? (
+                                            <ul style={styles.taskList}>
+                                                <Texto tamanho="24px" cor="#2D5186">Metas:</Texto>
+                                                {filteredMetas.map((meta, index) => (
+                                                    <li key={index} style={styles.metaItem}>
+                                                        <strong>{meta.Nome}</strong>
+                                                        <div>{format(new Date(meta.Dia), 'dd MMMM yyyy')}</div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <div style={styles.noTasksMessage}>Não há metas para esta data.</div>
+                                        )}
+                                    </>
                                 )}
                                 <button style={styles.closeButton} onClick={handleCloseModal}>Fechar</button>
                             </div>

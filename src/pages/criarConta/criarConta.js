@@ -27,7 +27,7 @@ function CriarConta() {
     };
 
     try {
-      const response = await fetch('https://89061440-c760-4877-89c3-b005ced1868f-00-ymi6i4frct2n.worf.replit.dev/cadastro', {
+      const response = await fetch('https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/cadastro', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

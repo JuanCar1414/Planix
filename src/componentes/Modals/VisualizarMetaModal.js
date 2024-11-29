@@ -1,44 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../Card";
 import Texto from "../Texto";
-import Calendar from "./CalendarioModal";
 import logoLixo from "../../imgs/logoLixo.png";
+import { useParams } from "react-router-dom";
 
 export default function VisualizarMetaModal({ isOpen, onClose }) {
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [openModalCalendar, setOpenModalCalendar] = useState(false);
+    const { NomeUsuario } = useParams(); // Captura o nome diretamente da URL
+    const [metas, setMetas] = useState([]); // Estado para armazenar as metas
+    const [loading, setLoading] = useState(true); // Estado de carregamento
 
-    const [metas, setMetas] = useState([
-        { id: 1, nome: "Agendar reunião inicial", concluida: false },
-        { id: 2, nome: "Enviar relatório final", concluida: false },
-        { id: 3, nome: "Revisar apresentação", concluida: false },
-    ]);
+    useEffect(() => {
+        if (isOpen) {
+            // Apenas busca as metas quando o modal está aberto
+            const fetchMetas = async () => {
+                try {
+                    const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-meta`);
+                    const data = await response.json();
+                    if (response.ok) {
+                        setMetas(data.Metas); // Armazena as metas no estado
+                    } else {
+                        alert('Erro ao buscar metas');
+                    }
+                } catch (error) {
+                    console.error("Erro ao carregar metas:", error);
+                    alert("Erro ao carregar metas");
+                } finally {
+                    setLoading(false); // Finaliza o carregamento
+                }
+            };
+            fetchMetas();
+        }
+    }, [isOpen, NomeUsuario]);
 
-    const toggleConclusao = (id) => {
+    // Função para alternar a conclusão da meta
+    const toggleConclusao = (index) => {
         setMetas((prevMetas) =>
-            prevMetas.map((metas) =>
-                metas.id === id ? { ...metas, concluida: !metas.concluida } : metas
+            prevMetas.map((meta, i) =>
+                i === index ? { ...meta, concluida: !meta.concluida } : meta
             )
         );
-    };
-
-    const handleCloseCalendarModal = () => {
-        setOpenModalCalendar(false);
     };
 
     const styles = {
         txtAddTarefa: {
             height: "63px",
             width: "90%",
-            display: "grid", // Layout em grid para alinhamento
-            gridTemplateColumns: "1fr auto", // Duas colunas
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
             alignItems: "center",
             borderBottom: "2px solid #d1d1d1",
             padding: "0 20px",
         },
         txtTitle: {
-            justifySelf: "start", // Título alinhado à esquerda
-
+            justifySelf: "start",
         },
         headerButton: {
             backgroundColor: "transparent",
@@ -46,11 +60,11 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
             boxShadow: "none",
             fontSize: "25px",
             cursor: "pointer",
-            justifySelf: "end", // Botão de fechar alinhado à direita
+            justifySelf: "end",
         },
         tarefa: {
             display: "grid",
-            gridTemplateColumns: "auto auto", // Layout em duas colunas para tarefas
+            gridTemplateColumns: "auto auto",
             alignItems: "center",
             justifyContent: "space-between",
             padding: "15px 20px",
@@ -89,6 +103,10 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
         },
     };
 
+    if (loading) {
+        return <Texto tamanho="16px" cor="#2D5186">Carregando metas...</Texto>;
+    }
+
     return (
         isOpen && (
             <div
@@ -108,7 +126,7 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
                     cor="#F8F8F8"
                     borda="solid #d1d1d1 2px"
                     radius="50px"
-                    id="cardTarefaAddModal"
+                    id="cardMetaAddModal"
                     style={{
                         position: "absolute",
                         top: "50%",
@@ -117,7 +135,6 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
                         zIndex: 1001,
                     }}
                 >
-                    {/* Cabeçalho com título e botão de fechar */}
                     <div style={styles.txtAddTarefa}>
                         <Texto tamanho="20px" cor="#2D5186" peso="100" style={styles.txtTitle}>
                             Visualizar Metas
@@ -129,38 +146,34 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
                         </button>
                     </div>
 
-                    {/* Corpo das tarefas */}
                     <div style={styles.corpoAddTarefa}>
-                        {metas.map((metas) => (
-                            <div key={metas.id} style={styles.tarefa}>
-                                {/* Lado esquerdo: Checkbox e nome da tarefa */}
-                                <div style={styles.tarefaEsquerda}>
-                                    <input
-                                        type="checkbox"
-                                        checked={metas.concluida}
-                                        onChange={() => toggleConclusao(metas.id)}
-                                        style={styles.tarefaCheckbox}
-                                    />
-                                    <Texto tamanho="16px" style={styles.tarefaTexto(metas.concluida)}>
-                                        {metas.nome}
-                                    </Texto>
+                        {metas.length > 0 ? (
+                            metas.map((meta, index) => (
+                                <div key={index} style={styles.tarefa}>
+                                    <div style={styles.tarefaEsquerda}>
+                                        {/* Checkbox que alterna a conclusão */}
+                                        <input
+                                            type="checkbox"
+                                            checked={meta.concluida}
+                                            onChange={() => toggleConclusao(index)}
+                                            style={styles.tarefaCheckbox}
+                                        />
+                                        <Texto tamanho="16px" style={styles.tarefaTexto(meta.concluida)}>
+                                            {meta.Nome}
+                                        </Texto>
+                                    </div>
+                                    <div style={styles.tarefaDireita}>
+                                        <Texto tamanho="14px" cor="#2D5186" style={styles.tarefaTexto(meta.concluida)}> 
+                                            {new Date(meta.Dia).toLocaleDateString()} - {meta.Horario}
+                                        </Texto>
+                                        <img src={logoLixo} height="20px" alt="Lixeira" />
+                                    </div>
                                 </div>
-
-                                {/* Lado direito: Data e ícone da lixeira */}
-                                <div style={styles.tarefaDireita}>
-                                    <Texto tamanho="14px" cor="#2D5186">
-                                        16/12 - 12:00 PM
-                                    </Texto>
-                                    <img src={logoLixo} height="20px" alt="Lixeira" />
-                                </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <Texto tamanho="16px" cor="#2D5186">Não há metas cadastradas.</Texto>
+                        )}
                     </div>
-
-                    {/* Modal do calendário, se aberto */}
-                    {openModalCalendar && (
-                        <Calendar isOpen={openModalCalendar} onClose={handleCloseCalendarModal} />
-                    )}
                 </Card>
             </div>
         )
