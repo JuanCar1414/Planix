@@ -25,7 +25,7 @@ export default function AddMetaModal({ isOpen, onClose }) {
         e.preventDefault();
 
         const meta = {
-            Dia: new Date(data), // Converte o valor de data para um objeto Date
+            Dia: new Date(data).toISOString().split('T')[0],  // Formato 'yyyy-mm-dd'
             Horario: hora,
             Nome: nomeMeta,
             Descricao: descricao,
@@ -39,9 +39,6 @@ export default function AddMetaModal({ isOpen, onClose }) {
                 },
                 body: JSON.stringify(meta),
             });
-
-            const responseData = await response.json(); // Recebe a resposta do backend
-            console.log(responseData); // Verifica a resposta
 
             if (response.ok) {
                 alert("Meta adicionada com sucesso!");
@@ -272,11 +269,16 @@ export default function AddMetaModal({ isOpen, onClose }) {
                                     value={descricao}
                                     onChange={handleDescricaoChange}
                                     style={styles.inputsModalAddValoresDescricao}
+                                    rows={1}
                                 />
                             </div>
-                            <button style={styles.submitModal} onClick={handleSubmit}>
-                                Adicionar
-                            </button>
+                            <input
+                                type="submit"
+                                id="SubmitModal"
+                                value="Salvar"
+                                onClick={handleSubmit}
+                                style={styles.submitModal}
+                            />
                         </div>
                     </div>
                 </Card>

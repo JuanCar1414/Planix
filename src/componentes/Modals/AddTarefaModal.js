@@ -25,10 +25,11 @@ export default function AddTarefaModal({ isOpen, onClose }) {
         e.preventDefault();
 
         const tarefa = {
-            Dia: data,
+            Dia: new Date(data).toISOString().split('T')[0],  // Formato 'yyyy-mm-dd'
             Horario: hora,
             Nome: nomeTarefa,
             Descricao: descricao,
+            Cloncluida: false, // Defina o valor inicial como 'false'
         };
 
         try {

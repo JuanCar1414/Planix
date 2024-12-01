@@ -23,6 +23,7 @@ import VisualizarTarefaModal from '../../componentes/Modals/VisualizarTarefaModa
 export default function Home() {
     const { NomeUsuario } = useParams();  // Captura o nome diretamente da URL
     const [nome, setNome] = useState('');
+    const [tarefas, setTarefas] = useState([]);  // Estado para armazenar as tarefas
 
     const [activeTab, setActiveTab] = useState('tarefas'); // Estado para rastrear o botão ativo
 
@@ -45,6 +46,35 @@ export default function Home() {
 
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        const fetchTarefas = async () => {
+            try {
+                const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-tarefa`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    const tarefasConcluidas = data.Tarefa.filter(tarefa => tarefa.Concluida); // Filtrar tarefas concluídas
+                    setTarefas(tarefasConcluidas); // Atualizar estado
+                } else {
+                    console.error("Erro no servidor:", data.message);
+                }
+            } catch (err) {
+                console.error("Erro ao buscar tarefas:", err);
+            }
+        };
+
+        // Chamar a função imediatamente ao carregar
+        fetchTarefas();
+
+        // Configurar atualização periódica
+        const interval = setInterval(() => {
+            fetchTarefas();
+        }, 10000); // Atualiza a cada 10 segundos (ajuste conforme necessário)
+
+        // Limpa o intervalo quando o componente é desmontado
+        return () => clearInterval(interval);
+    }, [NomeUsuario]); // Executa novamente se o `NomeUsuario` mudar
 
 
     useEffect(() => {
@@ -106,7 +136,7 @@ export default function Home() {
                 <div id="textos">
                     <Texto tamanho="16px" className="dataHoraNomeHome">{formatDate(currentDate)}</Texto>
                     {/* Exibindo o nome do usuário capturado da URL */}
-                    <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Boa tarde, {nome}</Texto>
+                    <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Ola, {nome}</Texto>
                 </div>
                 <div id="mainHome">
                     <Card altura="300px" largura="1050px" cor="#fefefe" borda="solid #d1d1d1 2px;" radius="50px" id="cardTarefa">
@@ -193,10 +223,28 @@ export default function Home() {
                                 </div>}
                         </div>
                     </Card>
-                    <div id="txtTarefa">
-                        <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Minhas Tarefas e Metas Recentes</Texto>
+                    <div id="txtTarefaConcluida">
+                        <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Minhas Tarefas e Metas Concluidas</Texto>
+                        <div id='tarefasMetasConcluidas'>
+                            {tarefas.length > 0 ? (
+                                tarefas.map(tarefa => (
+                                    <div key={tarefa._id} className="tarefaConcluida" id='tarefaConcluida'>
+                                        <img src={logoTarefa} height="23px" width="23px" alt="" />
+                                        <Texto tamanho="22px" className="dataHoraNomeHome" cor="#2D5186" peso="nromal">{tarefa.Nome}</Texto>
+                                        <div id='descricaoTarefaConcluida'>
+                                            <Texto tamanho="18px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Descricao da Tarefa:</Texto>
+                                            <Texto tamanho="18px">{tarefa.Descricao}</Texto>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <Texto tamanho="18px" cor="#2D5186">Nenhuma tarefa concluída encontrada.</Texto>
+                            )}
+                        </div>
 
                     </div>
+
+
                     <div id="divisao">
                         <div id="linhaDiv"></div>
                     </div>
