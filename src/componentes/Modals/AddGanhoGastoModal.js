@@ -3,16 +3,66 @@ import Card from "../Card";
 import Texto from "../Texto";
 import InputsEBotao from "../InputsEBotao";
 
-export default function AddGanhoGastoModal({ isOpen, onClose }) {
-    const [openModalAddGan, setOpenModalAddGan] = useState(false);
-    const [isOpenBtn, setIsOpenBtn] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('Mostrar Opções');
+export default function AddGanhoGastoModal({ isOpen, onClose, nomeUsuario }) {
+    const [IsOpenBtn, setIsOpenBtn] = useState(false);
+    const [SelectedOption, setSelectedOption] = useState('Escolha uma opcao'); // Padrão para "Ganhos"
+    const [Valor, setValor] = useState('');
+    const [Nome, setNome] = useState('');
+    const [Descricao, setDescricao] = useState('');
+    const [Tipo, setTipo] = useState('');
+    const [Mes, setMes] = useState('');
 
-    const toggleDropdownbtn = () => setIsOpenBtn(!isOpenBtn);
+    // Alterna o menu do botão
+    const toggleDropdownbtn = () => setIsOpenBtn(!IsOpenBtn);
+
+    // Seleciona entre "Ganhos" ou "Gastos"
     const handleOptionClick = (option) => {
         setSelectedOption(option);
-        setIsOpenBtn(false);  // Fecha o menu quando uma opção for selecionada
+        setIsOpenBtn(false);
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Validação básica
+        if (!Valor || !Nome || !Descricao || !Tipo || !Mes) {
+            alert("Por favor, preencha todos os campos!");
+            return;
+        }
+
+        const Dados = {
+            Valor,
+            Nome,
+            Descricao,
+            Tipo,
+            Mes
+        };
+
+        try {
+            const url = `https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${nomeUsuario}/${SelectedOption === 'Ganhos' ? 'add-ganhos' : 'add-gastos'}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(Dados),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(`${SelectedOption} adicionado com sucesso!`);
+                onClose(); // Fecha o modal
+            } else {
+                console.error('Erro ao adicionar:', data.message);
+                alert(`Erro: ${data.message || 'Não foi possível adicionar o dado.'}`);
+            }
+        } catch (error) {
+            console.error('Erro ao conectar com a API:', error);
+            alert("Erro ao conectar com o servidor. Tente novamente mais tarde.");
+        }
+    };
+
 
     const styles = {
         txtAddTarefa: {
@@ -43,8 +93,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
             padding: '0',
             margin: '0',
             position: 'absolute',
-            top: '12%',
-            right: '14.2%',
+            top: '13.4%',
+            right: '32.911%',
             backgroundColor: '#F8F8F8',
             border: '1px solid #d1d1d1',
             borderRadius: '8px',
@@ -121,38 +171,33 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
         },
     };
 
-    // Aqui garantimos que o modal seja exibido quando isOpen for true
     return (
         isOpen && (
             <div style={{
-                position: 'fixed',  // Usa "fixed" para fixar o fundo na tela
+                position: 'fixed',
                 top: 0,
                 left: 0,
-                width: '100%',  // A largura ocupa toda a tela
-                height: '100%',  // A altura ocupa toda a tela
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Fundo semi-transparente
-                zIndex: 1000,  // Garante que o fundo fique atrás do modal
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 1000,
             }}>
-                <Card altura="550px" largura="550px" cor="#F8F8F8" borda="solid #d1d1d1 2px;" radius="50px" id="cardTarefaAddModal"
-                    style={{
-                        position: 'absolute',  // Posiciona o modal no centro da tela
-                        top: '50%',  // Posição vertical centrada
-                        left: '50%',  // Posição horizontal centrada
-                        transform: 'translate(-50%, -50%)',  // Para ajustar ao centro exato
-                        zIndex: 1001  // Garante que o modal fique acima do fundo
-                    }}>
+                <Card altura="550px" largura="550px" cor="#F8F8F8" borda="solid #d1d1d1 2px;" radius="50px">
                     <div style={styles.txtAddTarefa}>
-                        <Texto tamanho="21px" cor="#2D5186">Adicionar Dado</Texto>
+                        <Texto tamanho="21px" cor="#2D5186">Adicionar Ganho/Gastos</Texto>
                         <div>
                             <button onClick={toggleDropdownbtn} style={styles.toggleBtn}>
-                                {selectedOption} {/* Exibe o texto da opção selecionada */}
+                                {SelectedOption}  {/* Mostra "Ganhos" ou "Gastos" */}
                             </button>
-                            {isOpenBtn && (
+                            {IsOpenBtn && (
                                 <ul style={styles.dropdownMenu}>
                                     <li>
                                         <button
                                             style={styles.opnToggleBtn}
-                                            onClick={() => handleOptionClick('Ganhos')}
+                                            onClick={() => handleOptionClick('Ganhos')}  // Seleciona Ganhos
                                         >
                                             Ganhos
                                         </button>
@@ -160,7 +205,7 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                                     <li>
                                         <button
                                             style={styles.opnToggleBtn}
-                                            onClick={() => handleOptionClick('Gastos')}
+                                            onClick={() => handleOptionClick('Gastos')}  // Seleciona Gastos
                                         >
                                             Gastos
                                         </button>
@@ -173,11 +218,13 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                         </button>
                     </div>
                     <div style={styles.corpoAddTarefa}>
+                        {/* Campos do Formulário */}
                         <div style={styles.campoDeValor}>
                             <Texto tamanho="16px" cor="#2D5186">Valor:</Texto>
                             <InputsEBotao
                                 placeholder="Valor"
-                                id="inputsModalAddValores"
+                                value={Valor}
+                                onChange={(e) => setValor(e.target.value)}
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
@@ -185,7 +232,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             <Texto tamanho="16px" cor="#2D5186">Nome:</Texto>
                             <InputsEBotao
                                 placeholder="Nome"
-                                id="inputsModalAddValores"
+                                value={Nome}
+                                onChange={(e) => setNome(e.target.value)}
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
@@ -193,7 +241,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             <Texto tamanho="16px" cor="#2D5186">Descrição:</Texto>
                             <InputsEBotao
                                 placeholder="Descrição"
-                                id="inputsModalAddValores"
+                                value={Descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
@@ -201,7 +250,8 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             <Texto tamanho="16px" cor="#2D5186">Tipo:</Texto>
                             <InputsEBotao
                                 placeholder="Tipo"
-                                id="inputsModalAddValores"
+                                value={Tipo}
+                                onChange={(e) => setTipo(e.target.value)}
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
@@ -209,11 +259,18 @@ export default function AddGanhoGastoModal({ isOpen, onClose }) {
                             <Texto tamanho="16px" cor="#2D5186">Mês:</Texto>
                             <InputsEBotao
                                 placeholder="Mês"
-                                id="inputsModalAddValores"
+                                value={Mes}
+                                onChange={(e) => setMes(e.target.value)}
                                 style={styles.inputsModalAddValores}
                             />
                         </div>
-                        <input type="submit" id="SubmitModal" value="Feito" style={styles.submitModal}></input>
+                        <input
+                            type="submit"
+                            id="SubmitModal"
+                            value="Feito"
+                            style={styles.submitModal}
+                            onClick={handleSubmit}
+                        />
                     </div>
                 </Card>
             </div>

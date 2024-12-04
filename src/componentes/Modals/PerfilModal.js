@@ -112,7 +112,7 @@ export default function PerfilModal({ isOpen }) {
                     </div>
                     <div style={{ ...styles.txtConfigPerfil, ...styles.txtSair }}>
                         <img src={logoSair} height="20px" width="20px" alt="Sair" />
-                        <Link to={null} style={styles.linksPerfil}>
+                        <Link to={"/"} style={styles.linksPerfil}>
                             <Texto peso="normal" tamanho="16px" cor="#000" margemLeft="8px">Sair</Texto>
                         </Link>
                     </div>

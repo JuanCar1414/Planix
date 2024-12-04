@@ -6,20 +6,31 @@ import { useParams } from "react-router-dom";
 import { format, addDays } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
-export default function VisualizarTarefaModal({ isOpen, onClose }) {
-    const { NomeUsuario } = useParams(); // Captura o nome diretamente da URL
-    const [metas, setMetas] = useState([]); // Estado para armazenar as metas
-    const [loading, setLoading] = useState(true); // Estado de carregamento
+export default function VisualizarMetaModal({ isOpen, onClose }) {
+    const { NomeUsuario } = useParams();
+    const [metas, setMetas] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (isOpen) {
-            // Apenas busca as metas quando o modal está aberto
             const fetchMetas = async () => {
                 try {
                     const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-meta`);
                     const data = await response.json();
+                    console.log('Resposta da API:', data); // Verificar estrutura da resposta
+
                     if (response.ok) {
-                        setMetas(data.Metas); // Armazena as metas no estado
+                        // Verifica se data.Metas existe e é um array
+                        if (data && Array.isArray(data.Metas)) {
+                            const storedConcluidas = JSON.parse(localStorage.getItem("concluidas")) || {};
+                            const metasComEstado = data.Metas.map(meta => ({
+                                ...meta,
+                                concluida: storedConcluidas[meta._id] || meta.concluida,
+                            }));
+                            setMetas(metasComEstado);
+                        } else {
+                            alert('Não foi possível encontrar as metas ou o formato está incorreto.');
+                        }
                     } else {
                         alert('Erro ao buscar metas');
                     }
@@ -27,56 +38,66 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
                     console.error("Erro ao carregar metas:", error);
                     alert("Erro ao carregar metas");
                 } finally {
-                    setLoading(false); // Finaliza o carregamento
+                    setLoading(false);
                 }
             };
             fetchMetas();
         }
     }, [isOpen, NomeUsuario]);
 
-    // Função para alternar a conclusão da meta
-    const toggleConclusao = (index) => {
-        setMetas((prevMetas) =>
-            prevMetas.map((meta, i) =>
+    const toggleConclusao = async (index) => {
+        setMetas((prevMetas) => {
+            const newMetas = prevMetas.map((meta, i) =>
                 i === index ? { ...meta, concluida: !meta.concluida } : meta
-            )
-        );
+            );
+
+            const updatedConcluidas = newMetas.reduce((acc, meta) => {
+                acc[meta._id] = meta.concluida;
+                return acc;
+            }, {});
+
+            localStorage.setItem("concluidas", JSON.stringify(updatedConcluidas));
+
+            // Atualiza o status no servidor com o campo correto 'Concluida'
+            const meta = newMetas[index];
+            fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/update-meta/${meta._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    concluida: meta.concluida  // Agora envia o valor atual da variável 'concluida'
+                }),
+            });
+
+            return newMetas;
+        });
     };
 
     const formatarData = (data) => {
-        // Converte a data para o fuso horário UTC considerando o fuso horário de São Paulo
         const dataUtc = fromZonedTime(data, 'America/Sao_Paulo');
-
-        // Adiciona um dia à data
         const dataComUmDiaAdicional = addDays(dataUtc, 1);
-
-        // Formata a data para o formato desejado
         return format(dataComUmDiaAdicional, 'dd/MM/yyyy');
     };
-    // Função para excluir a meta
-    const handleDeleteMeta = async (tarefaId) => {
+
+    const handleDeleteMeta = async (metaId) => {
         try {
             const response = await fetch(
-                `https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/deletar-meta`,
+                `https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/deletar-meta`,
                 {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id: tarefaId }), // Envia o ID da meta no corpo.
+                    body: JSON.stringify({ id: metaId }),
                 }
             );
 
             if (response.ok) {
-                const data = await response.json();
-                console.log('Resposta do servidor:', data);
-
-                // Remove a meta localmente
                 setMetas((prevMetas) =>
-                    prevMetas.filter((meta) => meta._id !== tarefaId)
+                    prevMetas.filter((meta) => meta._id !== metaId)
                 );
-
-                alert('Metas excluída com sucesso!');
+                alert('Meta excluída com sucesso!');
             } else {
                 const errorText = await response.text();
                 console.error('Erro no backend:', errorText);
@@ -87,7 +108,6 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
             alert('Erro ao tentar excluir a meta.');
         }
     };
-
 
     const styles = {
         txtAddTarefa: {
@@ -111,29 +131,46 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
             justifySelf: "end",
         },
         meta: {
-            display: "grid",
-            gridTemplateColumns: "auto auto",
-            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
             justifyContent: "space-between",
             padding: "15px 20px",
             borderBottom: "1px solid #ddd",
             width: "100%",
+            boxSizing: "border-box",
         },
         tarefaEsquerda: {
             display: "flex",
+            flexDirection: "row",
             alignItems: "center",
             gap: "10px",
+            width: "70%",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+        },
+        tarefaDescricao: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginTop: "5px",
         },
         tarefaDireita: {
             display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
-            gap: "10px",
-            justifyContent: "flex-end",
+            gap: "5px",
+            minWidth: "30%",
+            flexShrink: 0,
         },
         tarefaTexto: (concluida) => ({
             textDecoration: concluida ? "line-through" : "none",
             color: concluida ? "#aaa" : "#2D5186",
             fontSize: "16px",
+            wordWrap: "break-word",
+            textAlign: "start",
+            margin: "2px"
         }),
         tarefaCheckbox: {
             width: "20px",
@@ -150,12 +187,13 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
             padding: "8px",
         },
         nomeDescricaoMeta: {
-            height: "85%",
+            height: "90%",
             width: "90%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "start",
-            marginLeft: "6px"
+            marginLeft: "6px",
+            overflowWrap: "break-word",
         },
     };
 
@@ -193,7 +231,7 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
                 >
                     <div style={styles.txtAddTarefa}>
                         <Texto tamanho="20px" cor="#2D5186" peso="100" style={styles.txtTitle}>
-                            Visualizar metas
+                            Visualizar Tarefas
                         </Texto>
                         <button onClick={onClose} style={styles.headerButton}>
                             <Texto tamanho="26px" cor="#b1b1b1">
@@ -233,7 +271,6 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
                                             onClick={() => handleDeleteMeta(meta._id)}
                                             style={{ cursor: 'pointer' }}
                                         />
-
                                     </div>
                                 </div>
                             ))

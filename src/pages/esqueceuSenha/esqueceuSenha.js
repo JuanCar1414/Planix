@@ -20,7 +20,7 @@ export default function EsqueceuSenha() {
         }
 
         try {
-            const response = await fetch('https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/esqueci-senha', {
+            const response = await fetch('https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/esqueci-senha', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

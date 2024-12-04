@@ -76,22 +76,49 @@
     height: 100%;
     width: 100%;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     padding-bottom: 36px;
 }
 
 #cardEconomic {
-    padding: 8px;
+    width: 1050px;
+    background-color: #fefefe;
+    border: solid #d1d1d1 2px;
+    border-radius: 50px;
+    height: auto;
+    /* A altura será ajustada automaticamente com base no conteúdo */
+    padding: 20px;
+    /* Adiciona espaçamento interno */
+    box-sizing: border-box;
+    /* Garante que padding e bordas estejam dentro do tamanho do card */
+    overflow: hidden;
+    /* Impede que conteúdo transborde do card */
+    transition: height 0.3s ease;
+    /* Animação suave para o aumento de altura */
+
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-
     flex-direction: row;
+}
 
+@media (max-width: 1050px) {
+    #cardEconomic {
+        width: 100%;
+        /* Ajusta a largura para dispositivos menores */
+    }
 }
 
 #boxDeEco {
-    height: 100%;
-    width: 45%;
+    height: auto;
+    width: 80%;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #headerEco {
@@ -147,7 +174,7 @@
 
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     justify-content: space-between;
 
 }
@@ -322,13 +349,43 @@
     height: auto;
     width: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Exibe os itens em uma única coluna */
+    gap: 20px;
+    /* Espaçamento entre os itens */
+
 
     margin-top: 12px;
 
+}
+
+.tarefaConcluida {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    /* Define a imagem à esquerda e o texto à direita */
+    gap: 10px;
+    /* Espaçamento entre a imagem e o texto */
+    align-items: center;
+    /* Alinha a imagem e o texto no centro verticalmente */
+    padding: 10px;
+    border: 1px solid #d1d1d1;
+    /* Borda para separar as tarefas/metas */
+    border-radius: 10px;
+}
+
+.tarefaContent {
+    display: flex;
+    align-items: center;
+}
+
+.descricaoContent {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.descricaoContent Texto {
+    margin-top: 5px;
 }
 
 #descricaoTarefaConcluida {
@@ -340,4 +397,262 @@
     margin-left: 6px;
     overflow-wrap: break-word;
     text-align: center;
+}
+
+.meta {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tarefaEsquerda {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarefaDescricao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.tarefaDireita {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-width: 30%;
+    flex-shrink: 0;
+}
+
+.tarefaTexto {
+    font-size: 16px;
+    word-wrap: break-word;
+    text-align: start;
+    margin: 2px;
+}
+
+.tarefaCheckbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Corpo do Modal */
+.corpoAddTarefa {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.nomeDescricaoMeta {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 6px;
+    overflow-wrap: break-word;
+}
+
+.ganhoCampo {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-left: 6px;
+    overflow-wrap: break-word;
+}
+
+.gastoMeta {
+    display: flex;
+    justify-content: space-between;
+    /* Alinha a esquerda e direita */
+    align-items: center;
+    /* Alinha verticalmente os itens */
+    margin-bottom: 15px;
+    /* Espaçamento entre os itens */
+    border: 1px solid #d1d1d1;
+    /* Linha divisória opcional */
+    padding: 10px;
+
+    border-radius: 25px;
+    /* Espaço abaixo */
+    width: 100%;
+
+}
+
+.gastoEsquerda {
+    flex: 1;
+    /* Ocupa todo o espaço disponível na parte esquerda */
+}
+
+.gastoDescricaoMeta {
+    display: flex;
+    flex-direction: column;
+    /* Exibe as informações verticalmente */
+}
+
+.gastoTexto {
+    margin: 5px 0;
+    /* Espaçamento entre as linhas de texto */
+}
+
+.gastoDireita {
+    margin-left: 20px;
+    /* Espaço entre as informações e a lixeira */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gastoDireita img {
+    cursor: pointer;
+}
+
+.gastoDescricaoMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* Espaçamento entre as linhas */
+}
+
+.gastoTexto {
+    margin: 0;
+}
+
+.gastoTexto.concluida {
+    text-decoration: line-through;
+}
+
+.gastoTexto.naoConcluida {
+    font-weight: normal;
+}
+
+
+
+
+.gastoInfoLinha {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    /* Ajuste o espaçamento entre as linhas */
+}
+
+.gastoInfoLinha>Texto {
+    margin-right: 8px;
+    /* Espaço entre o título e o valor */
+}
+
+.gastoMeta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    /* Espaçamento entre os gastos */
+}
+
+/* Container do Card */
+.card-container {
+    /* Alinha verticalmente os itens */
+    margin-bottom: 15px;
+    /* Espaçamento entre os itens */
+    border: 1px solid #d1d1d1;
+    /* Linha divisória opcional */
+    padding: 20px;
+    /* Ajuste no padding para dar mais espaço interno */
+    border-radius: 12px;
+    /* Bordas mais suaves */
+    width: 400px;
+    /* Largura fixa */
+    height: 250px;
+    /* Altura fixa */
+    box-sizing: border-box;
+    transition: transform 0.2s ease-in-out;
+    /* Efeito de transição */
+
+    margin-bottom: 15px;
+    /* Espaçamento entre os itens */
+    border: 1px solid #d1d1d1;
+    /* Linha divisória opcional */
+    padding: 10px;
+}
+
+
+/* Título do Card */
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2D5186;
+    /* Azul escuro, semelhante ao Power BI */
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+/* Subtítulo ou Descrição */
+.card-subtitle {
+    font-size: 14px;
+    color: #A4A4A4;
+    /* Cinza suave */
+    margin-bottom: 10px;
+    /* Ajuste do espaçamento */
+    max-width: 100%;
+}
+
+/* Box de valor principal */
+.card-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Ajuste do alinhamento */
+    font-size: 26px;
+    font-weight: 700;
+    color: #2D5186;
+    /* Azul para destacar o valor */
+    margin-bottom: 10px;
+}
+
+/* Texto de descrição do maior gasto ou soma */
+.card-description {
+    font-size: 14px;
+    color: #A4A4A4;
+    /* Cinza suave */
+    margin-top: 10px;
+    max-width: 100%;
+}
+
+/* Box de valor secundário */
+.card-secondary-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #5A6A7F;
+    /* Cinza escuro */
+}
+
+/* Layout responsivo: ajustes para telas menores */
+@media (max-width: 768px) {
+    .card-container {
+        width: 100%;
+        /* Largura do card vai até o tamanho total da tela */
+        padding: 15px;
+        height: auto;
+        /* Permite altura automática em telas menores */
+    }
 }
