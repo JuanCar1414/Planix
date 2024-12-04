@@ -1,4 +1,7 @@
 import { useParams } from 'react-router-dom';
+
+import React, { useRef } from "react";
+
 import Card from '../../componentes/Card';
 import Header from '../../componentes/Header/Header';
 import Texto from '../../componentes/Texto';
@@ -35,6 +38,17 @@ export default function Home() {
 
     const [maiorGanho, setMaiorGanho] = useState(null);
     const [somaGanhos, setSomaGanhos] = useState(null);
+
+    const plannerRef = useRef(null);
+    const economicoRef = useRef(null);
+
+
+    const scrollToSection = (section) => {
+        if (section && section.current) {
+            section.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
 
 
     useEffect(() => {
@@ -358,8 +372,11 @@ export default function Home() {
 
     return (
         <>
-            <Header />
-            <div id="corpoHome">
+            <Header
+                onScrollToPlanner={() => scrollToSection(plannerRef)}
+                onScrollToEconomico={() => scrollToSection(economicoRef)}
+            />
+            <div id="corpoHome" ref={plannerRef}>
                 <div id="textos">
                     <Texto tamanho="16px" className="dataHoraNomeHome">{formatDate(currentDate)}</Texto>
                     {/* Exibindo o nome do usuário capturado da URL */}
@@ -493,7 +510,7 @@ export default function Home() {
                     </div>
 
 
-                    <div id="mainEcono">
+                    <div id="mainEcono" ref={economicoRef}>
                         <div id="textos">
                             <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Suas Economias</Texto>
                             <Texto tamanho="16px" className="dataHoraNomeHome">Organize-as aqui</Texto>
@@ -599,7 +616,7 @@ export default function Home() {
                                                     </div>
                                                 </>
                                             ) : erro ? (
-                                                <p>{erro}</p>
+                                                <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
                                             ) : (
                                                 'Carregando...'
                                             )}
@@ -611,7 +628,7 @@ export default function Home() {
                                             Soma dos Gastos:
                                         </Texto></div>
                                         <div className="card-value">
-                                            <Texto tamanho="26px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
+                                            <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
                                                 {somaGastos ? `R$ ${somaGastos}` : erro ? erro : 'Carregando...'}
                                             </Texto>
                                         </div>
@@ -711,24 +728,24 @@ export default function Home() {
                                             {maiorGanho ? (
                                                 <>
                                                     <div>
-                                                        <Texto tamanho="20px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="24px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Nome:
                                                         </Texto>
-                                                        <Texto tamanho="16px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
                                                             {maiorGanho.Nome}
                                                         </Texto>
                                                     </div>
                                                     <div>
-                                                        <Texto tamanho="20px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="24px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Valor:
                                                         </Texto>
-                                                        <Texto tamanho="16px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
                                                             {maiorGanho.Valor}
                                                         </Texto>
                                                     </div>
                                                 </>
                                             ) : erro ? (
-                                                <p>{erro}</p>
+                                                <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
                                             ) : (
                                                 'Carregando...'
                                             )}
@@ -742,7 +759,7 @@ export default function Home() {
                                             </Texto>
                                         </div>
                                         <div className="card-value">
-                                            <Texto tamanho="26px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
                                                 {somaGanhos ? `R$ ${somaGanhos}` : erro ? erro : 'Carregando...'}
                                             </Texto>
                                         </div>

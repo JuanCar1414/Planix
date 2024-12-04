@@ -15,7 +15,7 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
         if (isOpen) {
             const fetchMetas = async () => {
                 try {
-                    const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-meta`);
+                    const response = await fetch(`https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/ver-meta`);
                     const data = await response.json();
                     console.log('Resposta da API:', data); // Verificar estrutura da resposta
 
@@ -60,7 +60,7 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
 
             // Atualiza o status no servidor com o campo correto 'Concluida'
             const meta = newMetas[index];
-            fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/update-meta/${meta._id}`, {
+            fetch(`https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/update-meta/${meta._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

@@ -15,7 +15,7 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
         if (isOpen) {
             const fetchTarefas = async () => {
                 try {
-                    const response = await fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/ver-tarefa`);
+                    const response = await fetch(`https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/ver-tarefa`);
                     const data = await response.json();
                     if (response.ok) {
                         const storedConcluidas = JSON.parse(localStorage.getItem("concluidas")) || {};
@@ -53,7 +53,7 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
 
             // Atualiza o status no servidor com o campo correto 'Concluida'
             const tarefa = newTarefas[index];
-            fetch(`https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/update-tarefa/${tarefa._id}`, {
+            fetch(`https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/update-tarefa/${tarefa._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
     const handleDeleteTarefa = async (tarefaId) => {
         try {
             const response = await fetch(
-                `https://01d75781-3aac-4da8-840e-f329c0f1b732-00-wk2is7bchmpu.worf.replit.dev/${NomeUsuario}/deletar-tarefa`,
+                `https://13359055-906e-4585-9ab1-eb88fc2281f3-00-fdifq982mbt.worf.replit.dev/${NomeUsuario}/deletar-tarefa`,
                 {
                     method: 'DELETE',
                     headers: {

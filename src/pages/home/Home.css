@@ -85,7 +85,7 @@
 }
 
 #cardEconomic {
-    width: 1050px;
+    width: 100%;
     background-color: #fefefe;
     border: solid #d1d1d1 2px;
     border-radius: 50px;
@@ -97,23 +97,15 @@
     /* Garante que padding e bordas estejam dentro do tamanho do card */
     overflow: hidden;
     /* Impede que conteúdo transborde do card */
-    transition: height 0.3s ease;
-    /* Animação suave para o aumento de altura */
 
     display: flex;
     flex-direction: row;
 }
 
-@media (max-width: 1050px) {
-    #cardEconomic {
-        width: 100%;
-        /* Ajusta a largura para dispositivos menores */
-    }
-}
 
 #boxDeEco {
     height: auto;
-    width: 80%;
+    width: 100%;
 
 
     display: flex;
@@ -169,7 +161,7 @@
 }
 
 #boxDeValores {
-    height: 233px;
+    height: auto;
     width: 100%;
 
     display: flex;
@@ -495,7 +487,7 @@
 
     border-radius: 25px;
     /* Espaço abaixo */
-    width: 100%;
+    width: 95%;
 
 }
 
@@ -569,6 +561,9 @@
     /* Espaçamento entre os gastos */
 }
 
+
+
+
 /* Container do Card */
 .card-container {
     /* Alinha verticalmente os itens */
@@ -578,11 +573,11 @@
     /* Linha divisória opcional */
     padding: 20px;
     /* Ajuste no padding para dar mais espaço interno */
-    border-radius: 12px;
+    border-radius: 25px;
     /* Bordas mais suaves */
-    width: 400px;
+    width: 450px;
     /* Largura fixa */
-    height: 250px;
+    height: 130px;
     /* Altura fixa */
     box-sizing: border-box;
     transition: transform 0.2s ease-in-out;
@@ -604,6 +599,10 @@
     /* Azul escuro, semelhante ao Power BI */
     margin-bottom: 10px;
     max-width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Subtítulo ou Descrição */
