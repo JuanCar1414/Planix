@@ -90,7 +90,6 @@ export default function VisualizarTarefaModal({ isOpen, onClose }) {
                 setTarefas((prevTarefas) =>
                     prevTarefas.filter((tarefa) => tarefa._id !== tarefaId)
                 );
-                alert('Tarefa excluída com sucesso!');
             } else {
                 const errorText = await response.text();
                 console.error('Erro no backend:', errorText);

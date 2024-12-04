@@ -97,7 +97,6 @@ export default function VisualizarMetaModal({ isOpen, onClose }) {
                 setMetas((prevMetas) =>
                     prevMetas.filter((meta) => meta._id !== metaId)
                 );
-                alert('Meta excluída com sucesso!');
             } else {
                 const errorText = await response.text();
                 console.error('Erro no backend:', errorText);

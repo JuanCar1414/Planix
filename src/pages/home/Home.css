@@ -122,9 +122,9 @@
 }
 
 #divisao {
-    height: 17px;
+    height: 8px;
 
-    padding: 24px;
+    padding: 8px;
 }
 
 #linhaDiv {
@@ -162,12 +162,21 @@
 
 #boxDeValores {
     height: auto;
-    width: 100%;
+    width: 460px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    background-color: #F8F8F8;
+
+    border-radius: 25px;
+
+    border: 2px solid #d1d1d1;
+
+ margin-top: 8px;
+
 
 }
 
@@ -239,6 +248,38 @@
     background-color: #fff;
 
     text-decoration: underline solid #2D5186;
+
+    cursor: pointer;
+}
+
+#btnAddGanhoGastoEcon {
+    border: 0px solid #2D5186;
+    background-color: #2D5186;
+
+    height: 30px;
+
+    padding: 8px;
+
+    text-decoration: underline solid #2D5186;
+
+
+    border-radius: 25px;
+
+    cursor: pointer;
+}
+
+#btnAddGanhoGastoEcon:hover {
+    border: 0px solid #2D5186;
+    background-color: #355d9a;
+
+    height: 30px;
+
+    padding: 8px;
+
+    text-decoration: underline solid #2D5186;
+
+
+    border-radius: 25px;
 
     cursor: pointer;
 }
@@ -453,14 +494,19 @@
     padding: 8px;
 }
 
-.nomeDescricaoMeta {
-    height: 90%;
-    width: 90%;
+.gastoDescricaoMeta {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    margin-left: 6px;
+    gap: 5px;
+    /* Espaçamento entre os itens */
+    width: 100%;
+    /* Garante que ocupe o espaço permitido */
     overflow-wrap: break-word;
+    /* Garante quebra de linha */
+    word-wrap: break-word;
+    /* Compatibilidade adicional */
+    white-space: normal;
+    /* Permite quebra de linha normal */
 }
 
 .ganhoCampo {
@@ -474,6 +520,8 @@
 }
 
 .gastoMeta {
+
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
     /* Alinha a esquerda e direita */
@@ -485,26 +533,47 @@
     /* Linha divisória opcional */
     padding: 10px;
 
+    background-color: #fff;
+
     border-radius: 25px;
     /* Espaço abaixo */
-    width: 95%;
+    width: 80%;
+    height: 170px;
 
 }
 
 .gastoEsquerda {
     flex: 1;
+    height: 100%;
+
+    margin-left: 16px;
+    
     /* Ocupa todo o espaço disponível na parte esquerda */
 }
 
 .gastoDescricaoMeta {
     display: flex;
-    flex-direction: column;
-    /* Exibe as informações verticalmente */
+    /* Permite que os itens quebrem para a próxima linha se necessário */
+    gap: 50px;
+    /* Espaçamento entre os itens */
+    width: 100%;
+    height: 100%;
+
+    justify-content: space-around;
+    /* Garante que ocupe todo o espaço disponível */
 }
+
 
 .gastoTexto {
     margin: 5px 0;
-    /* Espaçamento entre as linhas de texto */
+    width: 100%;
+    /* Respeita o espaço do contêiner */
+    word-wrap: break-word;
+    /* Quebra de linha para palavras longas */
+    overflow-wrap: break-word;
+    /* Suporte adicional */
+    white-space: normal;
+    /* Permite quebra de linha normal */
 }
 
 .gastoDireita {
@@ -514,6 +583,9 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+
+    margin-right: 16px;
+
 }
 
 .gastoDireita img {
@@ -544,14 +616,22 @@
 
 .gastoInfoLinha {
     display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    /* Ajuste o espaçamento entre as linhas */
+    flex-direction: column;
+    /* Coloca o título e valor em uma pilha vertical */
+    align-items: flex-start;
+    /* Alinha à esquerda */
+    flex-basis: calc(50% - 15px);
+    /* Divide os campos em colunas flexíveis, ajustando o gap */
+
 }
 
 .gastoInfoLinha>Texto {
-    margin-right: 8px;
-    /* Espaço entre o título e o valor */
+    margin-bottom: 5px;
+    /* Espaçamento entre o título e o valor */
+    font-size: 16px;
+    font-weight: bold;
+    color: #2D5186;
+    /* Azul para o título */
 }
 
 .gastoMeta {
@@ -561,6 +641,11 @@
     /* Espaçamento entre os gastos */
 }
 
+.gastoValor {
+    font-size: 14px;
+    color: #555;
+    /* Cinza suave para o valor */
+}
 
 
 
@@ -575,19 +660,22 @@
     /* Ajuste no padding para dar mais espaço interno */
     border-radius: 25px;
     /* Bordas mais suaves */
-    width: 450px;
+    width: 400px;
     /* Largura fixa */
     height: 130px;
     /* Altura fixa */
     box-sizing: border-box;
     transition: transform 0.2s ease-in-out;
+
+    background-color: #fff;
     /* Efeito de transição */
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     /* Espaçamento entre os itens */
-    border: 1px solid #d1d1d1;
     /* Linha divisória opcional */
     padding: 10px;
+
 }
 
 
@@ -621,11 +709,12 @@
     align-items: center;
     justify-content: space-between;
     /* Ajuste do alinhamento */
-    font-size: 26px;
     font-weight: 700;
     color: #2D5186;
     /* Azul para destacar o valor */
     margin-bottom: 10px;
+
+    width: 80%;
 }
 
 /* Texto de descrição do maior gasto ou soma */
@@ -654,4 +743,22 @@
         height: auto;
         /* Permite altura automática em telas menores */
     }
+}
+
+.card-value {
+    word-wrap: break-word;
+    text-align: start;
+    margin: 2px;
+}
+
+#logoLixoValor{
+    margin-top: 160%;
+}
+
+.card-valueSoma{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
 }

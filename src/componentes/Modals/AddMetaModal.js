@@ -41,7 +41,6 @@ export default function AddMetaModal({ isOpen, onClose }) {
             });
 
             if (response.ok) {
-                alert("Meta adicionada com sucesso!");
                 onClose(); // Fecha o modal
             } else {
                 alert("Erro ao adicionar meta.");

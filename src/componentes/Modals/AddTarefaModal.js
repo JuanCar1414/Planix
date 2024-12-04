@@ -42,7 +42,6 @@ export default function AddTarefaModal({ isOpen, onClose }) {
             });
 
             if (response.ok) {
-                alert("Tarefa adicionada com sucesso!");
                 onClose(); // Fecha o modal
             } else {
                 alert("Erro ao adicionar tarefa.");

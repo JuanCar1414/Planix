@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import logoPlanixAzul from "../../imgs/logoPlanixAzul.png";
 import fotoPerfil from "../../imgs/gaxinimEmoji.png";
 import Texto from "../Texto";
 import DivCircular from "../DivCircular";
 import PerfilModal from "../Modals/PerfilModal";
-import { useState } from "react";
-import './Header.css';
+import AddGanhoGastoModal from "../../componentes/Modals/AddGanhoGastoModal.js";
+import "./Header.css";
 
 export default function Header({ onScrollToPlanner, onScrollToEconomico }) {
+    const { NomeUsuario } = useParams(); // Mova o useParams para dentro da função componente
     const [openModal, setOpenModal] = useState(false);
+    const [openModalAddGan, setOpenModalAddGan] = useState(false);
+
+    // Função para fechar o modal de "Adicionar Gasto/Ganho"
+    const handleCloseModalAddGan = () => {
+        setOpenModalAddGan(false);
+    };
 
     return (
         <div id="header">
@@ -38,6 +46,10 @@ export default function Header({ onScrollToPlanner, onScrollToEconomico }) {
                 >
                     Modo Econômico
                 </Texto>
+
+                <button onClick={() => setOpenModalAddGan(true)} className="txtCentro" id="btnAddGanhoGastoEcon">
+                    <Texto tamanho="16px" cor="#fff">Adicionar Gasto/Ganho</Texto>
+                </button>
             </div>
 
             <div id="perfilEInicio">
@@ -48,6 +60,14 @@ export default function Header({ onScrollToPlanner, onScrollToEconomico }) {
                 </button>
                 <PerfilModal isOpen={openModal} />
             </div>
+
+            {openModalAddGan && (
+                <AddGanhoGastoModal
+                    isOpen={openModalAddGan}
+                    onClose={handleCloseModalAddGan}
+                    nomeUsuario={NomeUsuario}
+                />
+            )}
         </div>
     );
 }

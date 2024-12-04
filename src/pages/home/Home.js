@@ -14,7 +14,7 @@ import './Home.css';
 import { Link } from 'react-router-dom';
 import PerfilModal from '../../componentes/Modals/PerfilModal.js';  // Importando o modal de perfil
 import { useState, useEffect } from 'react';
-import AddGanhoGastoModal from '../../componentes/Modals/AddGanhoGastoModal.js';
+
 import AddTarefaModal from '../../componentes/Modals/AddTarefaModal.js';
 import AddMetaModal from '../../componentes/Modals/AddMetaModal.js';
 import Calendar from '../../componentes/Modals/CalendarioModal.js';
@@ -140,7 +140,6 @@ export default function Home() {
                     setMetas((prevMetas) =>
                         prevMetas.filter((ganho) => ganho._id !== ganhoId)
                     );
-                    alert('Ganho excluído com sucesso!');
                 } else {
                     alert(`Erro: ${responseData.massage}`);
                 }
@@ -205,7 +204,6 @@ export default function Home() {
                     setGastos((prevGastos) =>
                         prevGastos.filter((gasto) => gasto._id !== gastoId)
                     );
-                    alert('Gasto excluído com sucesso!');
                 } else {
                     alert(`Erro: ${responseData.massage}`);
                 }
@@ -332,7 +330,7 @@ export default function Home() {
 
 
 
-    const [openModalAddGan, setOpenModalAddGan] = useState(false);
+
     const [openModalAddTar, setOpenModalAddTar] = useState(false);
     const [openModalAddMeta, setOpenModalAddMeta] = useState(false);
     const [openModalCalendar, setOpenModalCalendar] = useState(false);
@@ -340,10 +338,7 @@ export default function Home() {
     const [openModalVisualizarMeta, setOpenModalVisualizarMeta] = useState(false);
     const [openPerfilModal, setOpenPerfilModal] = useState(false); // Estado para controlar a abertura do modal de perfil
 
-    // Função para fechar o modal de "Adicionar Gasto/Ganho"
-    const handleCloseModalAddGan = () => {
-        setOpenModalAddGan(false);
-    };
+
 
     const handleCloseModalAddTar = () => {
         setOpenModalAddTar(false);
@@ -518,14 +513,11 @@ export default function Home() {
                         <div id="boxDeEco">
                             <div id="corpoEco">
                                 <div id="headerEco">
-                                    <Texto tamanho="32px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Gastos</Texto>
+                                    <Texto tamanho="28px" className="dataHoraNomeHome" cor="#2D5186" peso="500">Gastos</Texto>
                                     <img src={logoCarteira} height="35px" width="35px" alt="" />
                                 </div>
 
                                 <div id="boxDeValores">
-                                    <div id="txtsGastosVencimentos">
-                                        <Texto tamanho="18px">Gastos:</Texto>
-                                    </div>
                                     <div className="corpoAddTarefa">
                                         {gastos.length > 0 ? (
                                             gastos.map((gasto, index) => (
@@ -566,10 +558,7 @@ export default function Home() {
                                                     <div className="gastoDireita">
                                                         {/* Linha Valor */}
                                                         <div className="gastoInfoLinha">
-                                                            <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
-                                                                Valor:
-                                                            </Texto>
-                                                            <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
+                                                            <Texto tamanho="20px" cor="#2D5186" peso="500" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
                                                                 R$ {gasto.Valor}
                                                             </Texto>
                                                         </div>
@@ -582,6 +571,7 @@ export default function Home() {
                                                             alt="Lixeira"
                                                             onClick={() => handleDeleteGasto(gasto._id)}
                                                             style={{ cursor: 'pointer' }}
+                                                            id='logoLixoValor'
                                                         />
                                                     </div>
                                                 </div>
@@ -591,45 +581,51 @@ export default function Home() {
                                         )}
                                     </div>
 
+
                                     <div className="card-container">
-                                        <div className="card-title"><Texto tamanho="28px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
-                                            Maior Gasto:
-                                        </Texto></div>
+                                        <div className="card-title">
+                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                Maior Gasto:
+                                            </Texto>
+                                        </div>
                                         <div className="card-value">
                                             {maiorGasto ? (
                                                 <>
                                                     <div>
-                                                        <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="18px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Nome:
                                                         </Texto>
-                                                        <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
+                                                        <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
                                                             {maiorGasto.Nome}
                                                         </Texto>
                                                     </div>
                                                     <div>
-                                                        <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="18px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Valor:
                                                         </Texto>
-                                                        <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
-                                                            {maiorGasto.Valor}
+                                                        <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
+                                                            R$ {maiorGasto.Valor}
                                                         </Texto>
                                                     </div>
                                                 </>
                                             ) : erro ? (
-                                                <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
+                                                <Texto tamanho="18px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
                                             ) : (
                                                 'Carregando...'
                                             )}
                                         </div>
                                     </div>
 
+
                                     <div className="card-container">
-                                        <div className="card-title"><Texto tamanho="28px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
-                                            Soma dos Gastos:
-                                        </Texto></div>
-                                        <div className="card-value">
-                                            <Texto tamanho="22px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
-                                                {somaGastos ? `R$ ${somaGastos}` : erro ? erro : 'Carregando...'}
+                                        <div className="card-title">
+                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                Soma dos Gastos:
+                                            </Texto>
+                                        </div>
+                                        <div className="card-valueSoma">
+                                            <Texto tamanho="28px" className={`gastosTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                {somaGastos ? `R$ ${somaGastos}` : erro ? <Texto tamanho="18px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto> : 'Carregando...'}
                                             </Texto>
                                         </div>
                                     </div>
@@ -643,12 +639,6 @@ export default function Home() {
                                 </div>
 
                                 <div id="boxDeValores">
-                                    <div id="txtsGastosVencimentos">
-                                        <Texto tamanho="18px">Ganhos:</Texto>
-                                        <button onClick={() => setOpenModalAddGan(true)} className="txtCentro" id='btnAddGanhoGasto'>
-                                            <Texto tamanho="15px" cor="#2D5186">Adicionar Gasto/Ganho</Texto>
-                                        </button>
-                                    </div>
                                     <div className="corpoAddTarefa">
                                         {ganhos.length > 0 ? (
                                             ganhos.map((ganho, index) => (
@@ -666,14 +656,7 @@ export default function Home() {
                                                             </div>
 
                                                             {/* Linha Descrição */}
-                                                            <div className="gastoInfoLinha">
-                                                                <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
-                                                                    Descrição:
-                                                                </Texto>
-                                                                <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
-                                                                    {ganho.Descricao}
-                                                                </Texto>
-                                                            </div>
+
 
                                                             {/* Linha Mês */}
                                                             <div className="gastoInfoLinha">
@@ -684,19 +667,26 @@ export default function Home() {
                                                                     {ganho.Mes}
                                                                 </Texto>
                                                             </div>
+
+                                                            <div className="gastoInfoLinha">
+                                                                <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                                    Descrição:
+                                                                </Texto>
+                                                                <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                                    {ganho.Descricao}
+                                                                </Texto>
+                                                            </div>
                                                         </div>
                                                     </div>
 
                                                     <div className="gastoDireita">
                                                         {/* Linha Valor */}
                                                         <div className="gastoInfoLinha">
-                                                            <Texto tamanho="20px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
-                                                                Valor:
-                                                            </Texto>
-                                                            <Texto tamanho="16px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
+                                                            <Texto tamanho="20px" cor="#2D5186" peso="500" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`} >
                                                                 R$ {ganho.Valor}
                                                             </Texto>
                                                         </div>
+
 
                                                         {/* Lixeira */}
                                                         <img
@@ -706,6 +696,7 @@ export default function Home() {
                                                             alt="Lixeira"
                                                             onClick={() => handleDeleteGanho(ganho._id)}
                                                             style={{ cursor: 'pointer' }}
+                                                            id='logoLixoValor'
                                                         />
                                                     </div>
                                                 </div>
@@ -717,10 +708,9 @@ export default function Home() {
                                         )}
                                     </div>
 
-
                                     <div className="card-container">
                                         <div className="card-title">
-                                            <Texto tamanho="28px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                 Maior Ganho:
                                             </Texto>
                                         </div>
@@ -728,24 +718,26 @@ export default function Home() {
                                             {maiorGanho ? (
                                                 <>
                                                     <div>
-                                                        <Texto tamanho="24px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Nome:
                                                         </Texto>
-                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                        <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
                                                             {maiorGanho.Nome}
                                                         </Texto>
                                                     </div>
+                                                    <div></div>
+
                                                     <div>
-                                                        <Texto tamanho="24px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                             Valor:
                                                         </Texto>
-                                                        <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
-                                                            {maiorGanho.Valor}
+                                                        <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                            R$  {maiorGanho.Valor}
                                                         </Texto>
                                                     </div>
                                                 </>
                                             ) : erro ? (
-                                                <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
+                                                <Texto tamanho="18px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto>
                                             ) : (
                                                 'Carregando...'
                                             )}
@@ -754,13 +746,13 @@ export default function Home() {
 
                                     <div className="card-container">
                                         <div className="card-title">
-                                            <Texto tamanho="28px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
+                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`} cor="#2D5186" peso="500">
                                                 Soma dos Ganhos:
                                             </Texto>
                                         </div>
-                                        <div className="card-value">
-                                            <Texto tamanho="22px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
-                                                {somaGanhos ? `R$ ${somaGanhos}` : erro ? erro : 'Carregando...'}
+                                        <div className="card-valueSoma">
+                                            <Texto tamanho="28px" className={`ganhoTexto ${false ? 'concluida' : 'naoConcluida'}`}>
+                                                {somaGanhos ? `R$ ${somaGanhos}` : erro ? <Texto tamanho="18px" className={`gastoTexto ${false ? 'concluida' : 'naoConcluida'}`}>{erro} </Texto> : 'Carregando...'}
                                             </Texto>
                                         </div>
                                     </div>
@@ -776,7 +768,6 @@ export default function Home() {
             {openPerfilModal && <PerfilModal nome={nome} isOpen={openPerfilModal} onClose={handleClosePerfilModal} />}
 
             {/* Modal de Adicionar Gasto/Ganho */}
-            {openModalAddGan && <AddGanhoGastoModal isOpen={openModalAddGan} onClose={handleCloseModalAddGan} nomeUsuario={NomeUsuario} />}
 
             {
                 openModalAddTar && <AddTarefaModal isOpen={openModalAddTar} onClose={handleCloseModalAddTar}  // Aqui você passa o nome do usuário
